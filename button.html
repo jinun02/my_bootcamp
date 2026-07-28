@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="button" value="회원가입">
+        <input type="image" src="../imgs/KakaoTalk_Photo_2026-07-27-16-21-23.png" alt="로그인">
+        <input type="button" value="공지 창 열기" onclick="window.open('notice.html','_blank','width=300,height=400')">
+    
+    
+    
+    <!-- 
+    드롭다운 버튼 생성하기 ..select tag
+    드롭다운 버튼은 체크박스와 유사하지만 모양이 틀림.
+    select 로 시작하며, 내부의 아이템 목록은 option 태그로 구성을 함
+    선택된 값이 서버로 넘어가야 할때는 value 값을 저장해서 넘겨주도록 한다.
+    -->
+
+    <select name="type">
+        <option value="special_3">선물용 3kg</option>
+        <option value="special_5" selected>선물용 5kg</option>
+        <option value="family_3">가정용 3kg</option>
+        <option value="family_5">가정용 5kg</option>
+
+    </select>
+    </form>
+
+</body>
+</html>

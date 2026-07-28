@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>레드향 주문하기</title>
+    <!-- 외부 스타일 시트 연결 -->
+    <link rel="stylesheet" href="../css/order.css">
+</head>
+
+<body>
+    <div id="container">
+        <h1>레드향 주문하기</h1>
+        
+        <form action="order.jsp">
+            <fieldset>
+                <legend>상품 선택</legend>
+                <p><b>주문할 상품을 선택해 주세요.</b></p>
+                
+                <!-- 바깥쪽 li 제거 및 올바른 ul > li 표준 마크업 적용 (점 제거) -->
+                <ul id="product">
+                    <li>
+                        <label><input type="checkbox" name="product" value="s_3"> 선물용 3kg</label>
+                        <input type="number" min="0" max="5" value="0" name="cnt_s3"> 개<small>(최대 5개)</small>
+                    </li>
+                    <li>
+                        <label><input type="checkbox" name="product" value="s_5"> 선물용 5kg</label>
+                        <input type="number" min="0" max="3" value="0" name="cnt_s5"> 개<small>(최대 3개)</small>
+                    </li>
+                    <li>
+                        <label><input type="checkbox" name="product" value="h_3"> 가정용 3kg</label>
+                        <input type="number" min="0" max="5" value="0" name="cnt_h3"> 개<small>(최대 5개)</small>
+                    </li>
+                    <li>
+                        <label><input type="checkbox" name="product" value="h_5"> 가정용 5kg</label>
+                        <input type="number" min="0" max="3" value="0" name="cnt_h5"> 개<small>(최대 3개)</small>
+                    </li>
+                </ul>
+
+                <p><b>포장 선택</b></p>
+                <ul id="pack">
+                    <!-- li > label 교차 닫기 오류 수정 -->
+                    <li><label><input type="radio" name="pack" value="yes"> 선물 포장</label></li>
+                    <li><label><input type="radio" name="pack" value="no" checked> 선물 포장 안함</label></li>
+                </ul>
+            </fieldset>
+
+            <fieldset>
+                <legend>배송 정보</legend>
+                <ul id="shipping">
+                    <li>
+                        <label for="user-name">이름</label>
+                        <input type="text" name="username" id="user-name" required>
+                    </li>
+
+                    <li>
+                        <label for="addr">배송 주소</label>
+                        <input type="text" name="addr" id="addr" required>
+                    </li>
+
+                    <li>
+                        <label for="email">이메일</label>
+                        <input type="email" name="email" id="email">
+                    </li>
+
+                    <li>
+                        <label for="phone">연락처</label>
+                        <input type="tel" name="phone" id="phone" placeholder="010-1234-5678"
+                            pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" 
+                            title="010-1234-5678 형식으로 입력해 주세요." required>
+                    </li>
+                    
+                    <li>
+                        <!-- label for="start" -> for="del_day"로 연결 수정 -->
+                        <label for="del_day">배송 지정</label>
+                        <input type="date" id="del_day" name="del_day" list="data-list">
+                        <small>주문일로부터 최소 3일 이상</small>
+
+                        <datalist id="data-list">
+                            <option value="2026-07-27"></option>
+                            <option value="2026-07-28"></option>
+                            <option value="2026-07-29"></option>
+                        </datalist>
+                    </li>
+
+                    <li>
+                        <!-- name="memo" 속성 추가 -->
+                        <label for="memo">메모</label>
+                        <textarea id="memo" name="memo" cols="40" rows="4"></textarea>
+                    </li>
+                </ul>
+            </fieldset>
+
+            <div>
+                <input type="submit" value="주문하기">
+                <input type="reset" value="취소하기">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

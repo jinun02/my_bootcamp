@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 가입 화면</title>
+    <!-- CSS 파일을 연결합니다 -->
+    <link rel="stylesheet" href="../css/membership.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 1. 메인 제목 -->
+        <h1 class="main-title">회원 가입을 환영합니다</h1>
+
+        <form action="#" method="post">
+            <!-- 2. 첫 번째 그룹: 사용자 정보 -->
+            <fieldset>
+                <legend>사용자 정보</legend>
+                <ul>
+                    <li>
+                        <label for="userid">아이디</label>
+                        <input type="text" id="userid" name="userid" required>
+                    </li>
+                    <li>
+                        <label for="useremail">이메일</label>
+                        <input type="email" id="useremail" name="useremail" required>
+                    </li>
+                    <li>
+                        <label for="userpw">비밀번호</label>
+                        <input type="password" id="userpw" name="userpw" required>
+                    </li>
+                    <li>
+                        <label for="userpw_confirm">비밀번호 확인</label>
+                        <input type="password" id="userpw_confirm" name="userpw_confirm" required>
+                    </li>
+                    <li>
+                        <label for="img"> 사용할 이미지</label>
+                        <input type="file" id="form">
+                    </li>
+                    <!-- hidden tag : 서버로 전송되는 데이터를 사용자가 입력하지 않더라도,
+                     서버에 전송되도록 하는 태그임. -->
+                    <li>
+                        <label for="hi">여기 hidden 태그</label>
+                        <input type="hidden" id="hi" name="myhidden" value="defaultvalue">
+                    </li>
+                </ul>
+            </fieldset>
+
+            <!-- 3. 두 번째 그룹: 이벤트와 새로운 소식 -->
+            <fieldset class="options">
+                <legend>이벤트와 새로운 소식</legend>
+                <div class="radio-group">
+                    <input type="radio" id="mail-yes" name="mail-opt" value="yes">
+                    <label for="mail-yes">메일 수신</label>
+                    
+                    <input type="radio" id="mail-no" name="mail-opt" value="no" checked>
+                    <label for="mail-no">메일 수신 안 함</label>
+                </div>
+            </fieldset>
+
+            <!-- 4. 가입하기 및 취소 버튼 -->
+            <div class="button-group">
+                <input type="submit" value="가입하기">
+                <input type="reset" value="취소">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+</html>
