@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+ 	<head>
+        <meta charset="UTF-8">
+	</head>
+	<body>
+
+        <h2> 웹 문서에 멀티미디어 파일 삽입하기</h2>
+        <!-- tag명은 audio,video, object 등으로 구성된다. 
+         중요한건 src 라는 속성으로 미디어 파일이 위치한 경로를 주어집니다.
+         이후 추가 부가 속성이 있는데, 크기,play 여부, 반복여부 등이 있습니다. -->
+
+        <audio src="../medias/spring.mp3" controls width="700"></audio><br>
+
+        <!-- saad.mp4를 삽입해보시오. -->
+         <video src="../medias/flight.mp4" controls width="700" loop autoplay=""true"></video><br>
+
+         <!-- 객체 삽입은 src가 아니라 data-->
+        <object data="../medias/product.pdf" width="700" height="600"></object>
+	</body>
+</html>
