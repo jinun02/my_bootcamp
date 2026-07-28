@@ -1,0 +1,71 @@
+/* 이건 주석입니다. */
+/* 문서 전체에 적용하는 스타일 선언 */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+#container{
+    width: 480px;
+    margin: 209px auto;
+}
+
+h1{
+    font-size: 2em;
+    margin: 10px;
+}
+
+fieldset{
+    padding: 15px;
+}
+fieldset legend{
+    font-weight: bold;
+}
+
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+li{
+    margin: 10px;
+}
+
+#product input[type="number"]{
+    width: 30px;
+    margin-left: 10px;
+}
+
+#shipping li label{
+    width: 80px;
+    float: left;
+    text-align: left;
+}
+
+/* input type 이 text, tal, email 인 요소의 크기를 모두 300px로 맞추세요
+참고로 위 요소들을 모두 선택할때는 , 를 기준으로 찾아냅니다. */
+
+#shipping input[type="text"],
+#shipping input[type="tel"],
+#shipping input[type="email"]{
+    width: 300px;
+}
+
+/* form 태그 하위에 있는 자식 div를 선택해보자 > 를 이용해본다. */
+
+form > div{
+    margin-top:20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+form > div >input[type="submit"], input[type="reset"]{
+    text-align: center;
+    width: 150px;
+    height: 40px;
+    background-color: aliceblue;
+    border: 1px solid  #ccc;
+    box-shadow: 1px 1px 1px #ccc;
+}
+
+

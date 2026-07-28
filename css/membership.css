@@ -1,0 +1,37 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+#container{
+    width: 480px;
+    margin: 209px auto;
+}
+
+h1{
+    font-size: 2em;
+    margin: 10px;
+}
+fieldset legend{
+    font-weight: bold;
+}
+
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+li{
+    margin: 10px;
+}
+
+#event li label{
+    width: 50px;
+    float: left;
+    text-align: left;
+}
+
+#event input[type="text"]{
+    width: 300;
+}
+

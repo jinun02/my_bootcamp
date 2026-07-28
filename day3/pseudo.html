@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- 
+    가상클래스 : 가상클래스는 css에서 html과 사용자가 상호작용을 할 때 사용되는 중요한 요소입니다.
+    요소가 특정 상태일때만 가상 클래스를 적용해서 이팩트를 주는 효과를 줄 수 있습니다.
+    종류가 상당히 많지만, 필요한 부분을 알아보도록 할게요  
+    
+    love hate 기억 하세요! (link->visited->hover->active)
+    문법 : 특정 요소의 뒤에 : 를 사용, 가상클랫 이름을 적용하고, 이팩트를 정의 하는 방식입니다.
+    
+    ex>butto:hover{//마우스 커서를 올렸을때 요소 선택,,}
+    input:checked{css} 체크된 상태일때 요소 선택등..
+    -->
+
+    <style>
+        button {
+            color: white;
+            padding: 0.8em 1.5em;
+            background-color: orange;
+            border: none;
+            /* 모서리 각도 */
+            border-radius: 5px;
+        }
+
+        /*
+        button:hover {
+            background-color: gray;
+        }
+
+        button:active {
+            background-color: black;
+        }
+
+        input:active {
+            background-color: red;
+        }
+
+        :link {
+            background-color: red;
+        }
+
+        a:hover {
+            background-color: blue;
+        }
+
+        :visited {
+            background-color: green;
+        }
+
+        input:checked{
+            border: none;
+            outline: 3px solid red;
+        }
+*/
+
+        /* 체크된 input 요소를 선택해서 바로 뒤에있는 lable을 선택할때 선택자를 조합해서 사용합니다. */
+        input:checked+label {
+            background-color: blue;
+            color: red;
+        }
+
+        textarea:disabled {
+            color: #aaa;
+            background-color: green;
+            border-color: aqua;
+            cursor: not-allowed;
+        }
+
+        [type="submit"]:disabled {
+            color: royalblue;
+            background-color: red;
+            cursor: not-allowed;
+        }
+
+
+    /* required 박스는 bg color red, border 1 solid red 로 정의해 보아라 */
+        input:required{
+            color:#000;
+            background-color: red;
+            border: 1px solid red;
+
+        }
+
+        input:optional{
+            border: 1px solid blue;
+        }
+        
+        
+        
+
+
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <h2>가상 클래스</h2>
+        <p><a href="http://www.daum.net">Daum</a></p>
+        <p><a href="http://www.naver.net">naver</a></p>
+
+        <button>버튼을 눌러 주세요</button>
+        <button>버튼을 눌러 주세요</button>
+        <br>
+        <label for="user_id">아이디</label>
+        <input type="text" id="user_id">
+
+
+
+        <form>
+            <label for="search">검색어</label>
+            <input type="search" id="search" placeholder="검색어를 입력하시오">
+            <button type="submit" id="search-button" disabled>검색어를 입력하시오</button>
+
+
+            <fieldset>
+                <legend>흥미로운 주제 선택</legend>
+                <input type="radio" name="favorite" id="html" checked>
+                <label for="html">HTML</label>
+                <br>
+                <input type="radio" name="favorite" id="css">
+                <label for="css">CSS</label>
+            </fieldset>
+            <fieldset>
+                <legend>개인정보처리방침에 대한 동의</legend>
+                <input type="checkbox" name="privacy" id="privacy" checked>
+                <label for="privacy">네, 동의합니다.</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>댓글 쓰기</legend>
+                <textarea disabled>현재 댓글은 안됩니다.</textarea>
+            </fieldset>
+
+            <fieldset>
+                <legend>비밀번호는 필수</legend>
+                <p>
+                    <label for="username">이름</label>
+                    <input id="username" type="text">
+                </p>
+                <p>
+                    <label for="userpassword">비밀번호 <span class="req">*</span></label>
+                    <input id="userpassword" type="password" required> <!-- 필수 상태가 된 폼 컨트롤 요소 -->
+                </p>
+                <p>
+                    <button type="submit">제출</button>
+                </p>
+            </fieldset>
+
+
+        </form>
+
+    
+
+
+
+
+        <!-- 스크립트는 문서 어디든지 선언가능하다 -->
+        <script>
+            const searchInput = document.getElementById("search");
+            const searchButton = document.getElementById("search-button");
+
+            searchInput.addEventListener("input", () => {
+                if (searchInput.value.trim()) {
+                    searchButton.disabled = false;
+                } else {
+                    searchInput.disabled = true;
+
+                }
+            })
+
+        </script>
+
+    </body>
+</body>
+
+</html>

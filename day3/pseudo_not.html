@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        /* li:not(.not-bg){
+           background-color: aqua; 
+        } */
+
+        li:nth-child(1) {
+            background-color: blanchedalmond;
+        }
+        article h2:first-child{
+            background-color: brown;
+        }
+
+        article *:first-child{
+            background-color: brown;
+        }
+
+        li:nth-child(even){
+            background-color: aqua;
+        }
+
+    </style>
+</head>
+
+</body>
+<ul>
+    <li>나는 li 요소입니다.</li>
+    <li class="not-bg">나는 .not-bg 클래스 선택자를 가진 li 요소입니다.</li>
+    <li>나는 li 요소입니다.</li>
+    <li>나는 li 요소입니다.</li>
+    <li>나는 li 요소입니다.</li>
+</ul>
+
+<article>
+    <h2>제목 요소</h2>
+    <p>문단 요소 1</p>
+    <p>문단 요소 2</p>
+</article>
+
+<article>
+    <div>이 'div'는 첫 번째입니다.</div>
+    <div>이 <span>중첩된 'span'은 첫 번째입니다.</span>!</div>
+    <div>
+        이 <em>중첩된 'em'은 첫 번째입니다.</em>, 하지만 <em>중첩된 이 'em'은 마지막입니다.</em>!
+    </div>
+    <div>이 <span>중첩된 'span'은 스타일됩니다.</span>!</div>
+    <p>이 'p'는 첫 번째가 아닙니다.</p>
+    <div>이 'div'는 마지막입니다.</div>
+</article>
+</body>
+
+</html>

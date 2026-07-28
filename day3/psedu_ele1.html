@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        가상요소(element) 선택자 : 가상요소라는건 특정 요소의 앞, 뒤 또는 문단, 글자 앞 등의
+        기존요소에 가상의 요소를 생성하고 스타일링을 할때 사용되는 선택자입니다.
+        아걸 사용하는 이유는 일일이 요소를 정의하지 않고서 가상의오 한번만 생성하고 사용할 수 있는
+        장점이 있기 때문이다.
+
+        1.::before : 선택한 요소의 실재 컨텐츠 앞에 첫번째 자식처럼 가상의 자식요소를 생성하고
+        이를 스타일링 하는것. 반드시 컨텐츠가 존재 해야함.
+    -->
+
+    <style>
+        p::before{
+            content: "😎";
+            vertical-align: 0.1;
+            margin-right: 1em;
+        }
+        h2::before{
+            content: "";
+            display: block;
+            width: 2em;
+            height: 0.3em;
+            background-color: violet;
+            margin-bottom: 0.3em;
+        }
+
+        ul{
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        li{
+            list-style: none;
+
+        }
+        a{
+            color: inherit;
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        li:not(:first-child)::before{
+            content: "";
+            display: inline-block;
+            width: 1px;
+            height: 1em;
+            background-color: rgba(0, 0, 0, .6);
+            margin: 0 1.lem;
+            vertical-align: -0.06em;
+            white-space: nowrap;
+        }
+
+        a.back{
+            color: wheat;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            background-color: blueviolet;
+            border: 1px solid #777;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        a.back::before{
+            content: "";
+            display: inline-flex;
+            width: 0.5em;
+            height: 0.5em;
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+            transform: rotateZ(45deg);
+            margin-right: 0.2em;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <!-- new라는 시멘틱 요소를 사용해서 gnb(global navigaiton var) 를 만들어 보려고 합니다.-->
+    <nav>
+        <ul>
+            <li><a href="">제품보기</a></li>
+            <li><a href="">개인정보 처리 방침</a></li>
+            <li><a href="">고객센터</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <a class="back" href="">뒤로 가기</a>
+
+
+    <!-- <h2>가상 요소 선택자</h2>
+    <p>
+        문단의 컨텐츠 입니다.
+    </p> -->
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        속성 선택자 : HTML 태그 내부에 존재하는 속성을 기준으로 선택자를 찾는 방법
+        종류로눈 일반 속성선택자, 클래스 선택자(이미알고있음), ID선택자가 있음.
+
+        1. 일반 속성 선택자 : [attr] : 지정된 속성 이름이 일치하는 모든 요소 리턴함.
+        
+    -->
+    <style>
+        [title]{
+            background-color: blueviolet;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <p>쉽고 재밌는 CSS <abbr title="HTML">HTML</abbr>을 배우기</p>
+    <a href="https:www.wc2.org" title="공식 웹 사이트">예시 사이트</a>
+</body>
+</html>

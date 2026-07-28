@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 
+    서로다른 요소를 선택할때 우선수위가 뭐 부터 선택 될지를 결정하는 요소입니다.
+    결론만 말하자면 important가 가장 높고 id,class,tag,* 순위로 적용됩니다 
+    -->
+
+    <style>
+        *{ /* 모든요소*/
+            color: red;
+        }
+        p{
+            color: blue;
+        }
+        #my-id{
+            color: green;
+        }
+        .a{
+            color: olive !important; /* !importent 는 다 무시하고 제일 먼저*/
+        }
+        .b{
+            color: pink;
+        }
+
+
+        h1,h2,p{
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1> 이건 해더입니다.</h1>
+    <h2> 이건 두번째 해더입니다</h2>
+    <p id="my-id" class="a b"> 모든요소 </p>
+    
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- 
+    is() 함수형 선택자, 내부에 선택자를 하나 이상 "," 를 기준으로 나열해서
+    해당하는 선택자가 발견되면 css를 적용하도록 하는 가상 클래스 입니다.
+    주의 해야할 점은 내부의 값으로 가상 클래스는 지원하지 않습니다. is:(required)안됨 
+ ex> is(p) or is(p,span),is(.class) or is(.class,p,#id), is(#id), is(#id,class)
+ 
+    where() : is와 동일하지만 is가 더 우선순위(구체성)가 높음.
+
+    has() : ()안의 형제, 자손 관계가 선택자 목록중 한개라도 관계를 가지고 있음 요소를 선택해줌
+
+    ex>:has(+ p) p와 형제 관계를 가진 모든 요소를 선택하시오
+    h1:has(> span) span 요소와 부모 관계를 가진 h1 요소를 선택
+    .a:has(span) span 요소와 조상 관계를 가진 a클래스 값을 가지는 요소 선택
+
+    :has(+ p, > span) 바로뒤에 p 요소와 형제 관계를 가지거나,
+    span요소와 부모관계를 가지는 모든 요소 선택
+
+    +: 형제관계 _: 자식
+ -->
+
+
+    <style>
+        :where(h5) {
+            color: blue;
+        }
+
+        :is(h4, p) span {
+            background-color: yellow;
+        }
+
+        /* div 요소의 자손 p 요소를 선택하라는 의미 */
+        div p {
+            background-color: yellow;
+        }
+
+        div article {
+            border: 1px solid blue;
+        }
+       
+        li{
+            list-style-type: disc;
+        }
+        li li {
+            list-style-type: circle;
+            color: red;
+        }
+
+        h4:has(+ p){
+            background-color: blue;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <div>아이템 li</div>
+            <ul>
+                <li>서브아이템 li li</li>
+                <li>서브아이템 li li</li>
+            </ul>
+        </li>
+        <li>
+            <div>아이템 li</div>
+            <ul>
+                <li>서브아이템 li li</li>
+                <li>서브아이템 li li</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>자손 선택자</h2>
+    <p>p 요소입니다.</p>
+    <div>
+        <p>앞에서 지정한 div 요소의 타깃 자손 요소인 p를 모두 선택합니다.</p>
+        <p>앞에서 지정한 div 요소의 타깃 자손 요소인 p를 모두 선택합니다.</p>
+        <article>
+            <h3>article</h3>
+            <p>앞에서 지정한 div 요소의 타깃 자손 요소인 손자 p도 선택합니다.</p>
+
+        </article>
+    </div>
+
+    <h4>H4<span>span</span>입니다.</h4>
+    <p>요소 입니다.</p>
+    <h5>H5입니다.</h5>
+    <p>두번때 구문입니다.</p>
+
+
+
+</body>
+</body>
+
+</html>

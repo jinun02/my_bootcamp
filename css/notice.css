@@ -1,0 +1,20 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin: 0;
+    min-width: 100vh;
+}
+
+#container{
+    width: 250px;
+    height: 375px;
+    padding: 100px 50px;
+    border: 1px solid blueviolet;
+    background: url(../imgs/KakaoTalk_Photo_2026-07-27-16-44-13.jpeg) no-repeat left top;
+    background-size: auto;
+}
