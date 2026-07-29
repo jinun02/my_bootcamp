@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+    ::marker 주로 사용되는 곳으 li임 자동을 마커를 생성하도록 하는 가상요소이다 -->
+
+    <!-- ::placeholder input 요소에 나오는 placeholder의 스타일을 정의할수 있음 -->
+<style>
+    li::marker{
+        content: "__";
+        color: red;
+        font-family: 0.9em;
+    }
+
+    input::placeholder{
+        opacity: 0.1;
+        color: black;
+        font-size: 1.2em;
+        font-style: italic;
+        font-weight: 200;
+        text-align: center;
+        
+    }
+
+
+    </style>
+</head>
+<body>
+    <Input type="text" placeholder="placeholder text"></Input>
+    <ul>
+        <li>김밥</li>
+        <li>라면</li>
+        <li>우동</li>
+    </ul>
+    
+</body>
+</html>

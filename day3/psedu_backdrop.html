@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        dialog::backdrop{
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h4>::backdrop 가상요소 알아보기</h4>
+    <p>대화 상자 열기 버튼 클릭하기</p>
+    <dialog id="mydog">
+        <button id="close-btn" type="button" autofocus>대화상자 닫기</button>
+    </dialog>
+    <button id="open-btn" type="button">대화상자 열기</button>
+    
+    <script>
+        const dialog =document.getElementById('mydog');
+        const showbt =document.getElementById('open-btn');
+        const closebt =document.getElementById('close-btn');
+
+        showbt.addEventListener("click",()=>{
+            dialog.showModal();
+        });
+
+        closebt.addEventListener("click",()=>{
+            dialog.close();
+        });
+
+
+    </script>
+</body>
+</html>
