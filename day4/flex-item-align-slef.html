@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex-container {
+            /* 플렉스 컨테이너 */
+            display: flex;
+            height: 150px;
+            border: 4px dashed silver;
+            flex-direction: row;
+            /* 주축(main axis, 기본 축)을 결정 */
+            align-items: stretch;
+        }
+
+        .item {
+            /* 플렉스 아이템 */
+            border: 4px solid blue;
+            background-color: silver;
+
+        }
+
+        .item.item-self {
+            /* 부모에서 정의한 부분외에 따로 지정하고싶은것은 align-self를 사용함.*/
+            background-color: yellowgreen;
+            align-self: auto;
+        }
+
+        .chat-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            /* 메세지 사이의 간격 */
+            gap: 12px;
+            padding: 20px;
+            max-width: 300px;
+            background-color: yellow;
+            border-radius: 1-px;
+        }
+        .message{
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+            max-width: 80%; /* 메세지가 너무 커지지 않도록 제한*/
+            background-color: wheat;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            align-self:flex-start;
+        }
+        
+        .my-message{
+            background-color: blue;
+            color: aliceblue;
+            border-top-right-radius: 2px;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div class="item">1</div>
+        <div class="item item-self">Self</div>
+        <div class="item">3</div>
+    </div>
+
+    <hr>
+    <div class="chat-container">
+        <div class="message"> <!-- 상대방 메시지 (기본 정렬) -->
+            안녕하세요! 오늘 작업 어디까지 진행됐나요?
+        </div>
+        <div class="message my-message">
+            방금 CSS 레이아웃 작업 끝냈습니다. 이제 align-self만 적용하면 돼요!
+        </div>
+        <div class="message"> <!-- 상대방 메시지 (기본 정렬) -->
+            오, 좋네요! 채팅창 디자인이 훨씬 깔끔해 보이겠어요.
+        </div>
+        <div class="message my-message">
+            네, 금방 완성해서 보여드릴게요! 🚀
+        </div>
+    </div>
+</body>
+
+</html>

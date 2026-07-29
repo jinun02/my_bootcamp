@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .flex-container-1 {
+            background-color: silver;
+            display: flex;
+            height: 300px;
+            width: 150px;
+            border: 1px solid black;
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            align-content: first baseline;
+        }
+
+        .flex-container-2 {
+            background-color: silver;
+            display: flex;
+            height: 300px;
+            width: 150px;
+            border: 1px solid black;
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            align-content: end;
+        }
+
+        .flex-container-3 {
+            background-color: silver;
+            display: flex;
+            height: 300px;
+            width: 150px;
+            border: 1px solid black;
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            align-content: center;
+        }
+
+        .flex-container-4 {
+            background-color: silver;
+            display: flex;
+            height: 300px;
+            width: 150px;
+            border: 1px solid black;
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            align-content: space-between;
+        }
+
+        .flex-container-5 {
+            background-color: silver;
+            display: flex;
+            height: 300px;
+            width: 150px;
+            border: 1px solid black;
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            align-content: normal;
+        }
+
+        .flex-container-6 {
+            background-color: silver;
+            display: flex;
+            height: 300px;
+            width: 150px;
+            border: 1px solid black;
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            align-content: stretch;
+        }
+
+        .flex-container-1 .item,
+        .flex-container-2 .item,
+        .flex-container-3 .item,
+        .flex-container-4 .item,
+        .flex-container-5 .item {
+            height: 50px;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flex-container-6 .item{
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item:nth-child(odd) {
+            background-color: orange;
+        }
+
+        .item:nth-child(even) {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="flex-container-1">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+        </div>
+
+        <div class="flex-container-2">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+        </div>
+
+        <div class="flex-container-3">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+        </div>
+
+        <div class="flex-container-4">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+        </div>
+
+        <div class="flex-container-5">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+        </div>
+
+        <div class="flex-container-6">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* basis 속성 : 이이탬의 크기를 계산할 때 사용하는 주축 방향의 기준 크기를 지장힐때 사용함.
+        주축은 가로 주축을때는 width를 세로일때는 height 를 기준으로 함 
+        
+        플랙스 컨테이너에 남는 공간은 flex-grow 속성의 설정에 따라 아이탱이 얼마나 커질지를 제어하고,
+         공간이 부족할 경우에는 skrink 속성에 따라 아이탬이 축소될지 제어할 수 있음
+        */
+
+        .flex-container{
+            display: flex;
+            border: 4px dashed silver;
+            flex-direction: row;
+        }
+        .item{
+            border: 4px solid blue;
+            background-color: silver;
+            flex-grow: 0; /*남는 공간이 있어도 아이탬이 전혀 커지지 않는다는 뜻*/
+            flex-shrink: 0; /*남는 공간이 있어도 아이탬이 전혀 축소되지 않는다는 뜻*/
+            flex-basis: auto; /*아이탬의 본래 컨텐츠 너비를 기준으로 한다는 뜻*/
+        }
+        .item.item-2{
+            background-color: yellow;
+            flex-basis: 100px;
+        }
+
+        .item-1, .ltem-3{
+            border: 4px solid gray;
+            background-color: gray;
+            flex-grow: 1; /*부모의 공간이 남을 경우 , 아이탬이 남은 공간만큼 크기를 나누어 커질떄
+            해당 아이탬이 커질 비율 값을 1로 설정한다는 의미*/
+        }
+        .item-2{
+            border: 4px solid red;
+            background-color: violet;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div class="item item-1">Item-1</div>
+        <div class="item item-2">Item-2</div>
+        <div class="item item-3">Item-3</div>
+    </div>
+
+    <div class="flex-container2">
+        <div class="item item-1">grow1</div>
+        <div class="item item-2">grow...</div>
+        <div class="item item-3">grow...</div>
+    </div>
+</body>
+
+</html>

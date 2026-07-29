@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+    flex align-contenes : 여러줄로 배치된 아이탬 교차축을 기준으로 정렬하는 방식을 지정함. 
+    
+    -->
+
+    <style>
+        .flex-container {
+            display: flex;
+            border: 2px dashed #000;
+            flex-direction: row;
+
+        }
+
+        .item {
+            width: 33.33333%;
+            border: 4px solid blue;
+            transition: order 1s;
+        }
+
+        .order-0,
+        .order-1 {
+            background-color: silver;
+        }
+
+        .order-0 {
+            order: 0;
+        }
+
+        .order-1 {
+            order: 1;
+        }
+
+        .order-2 {
+            order: 2;
+        }
+
+        .change-order {
+            background-color: blueviolet;
+            order: 0;
+        }
+
+
+        /* =============== */
+
+        .light-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5em;
+            padding: 2em;
+        }
+
+        /* 공통 스타일 */
+        .light {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        /* 빨간 조명 */
+        .red-light {
+            background: #ff3b3b;
+            box-shadow:
+                0 0 20px #ff3b3b,
+                0 0 50px #ff3b3b,
+                0 0 90px #ff3b3b;
+            animation-name: red-order-animation;
+        }
+
+        /* 초록 조명 */
+        .green-light {
+            background: #00ff88;
+            box-shadow:
+                0 0 20px #00ff88,
+                0 0 50px #00ff88,
+                0 0 90px #00ff88;
+            animation-name: green-order-animation;
+        }
+
+        /* 파란 조명 */
+        .blue-light {
+            background: #3b82ff;
+            box-shadow:
+                0 0 20px #3b82ff,
+                0 0 50px #3b82ff,
+                0 0 90px #3b82ff;
+            animation-name: blue-order-animation;
+        }
+
+        /* 빨간 조명의 순서 변경 */
+        @keyframes red-order-animation {
+            0% {
+                order: 1;
+                transform: scale(1);
+            }
+
+            33% {
+                order: 3;
+                transform: scale(1.25);
+            }
+
+            66% {
+                order: 2;
+                transform: scale(0.85);
+            }
+
+            100% {
+                order: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 초록 조명의 순서 변경 */
+        @keyframes green-order-animation {
+            0% {
+                order: 2;
+                transform: scale(0.85);
+            }
+
+            33% {
+                order: 1;
+                transform: scale(1);
+            }
+
+            66% {
+                order: 3;
+                transform: scale(1.25);
+            }
+
+            100% {
+                order: 2;
+                transform: scale(0.85);
+            }
+        }
+
+        /* 파란 조명의 순서 변경 */
+        @keyframes blue-order-animation {
+            0% {
+                order: 3;
+                transform: scale(1.25);
+            }
+
+            33% {
+                order: 2;
+                transform: scale(0.85);
+            }
+
+            66% {
+                order: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                order: 3;
+                transform: scale(1.25);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div class="item order-0">Item-order-0</div>
+        <div class="item order-1">Item-order-1</div>
+        <div class="item order-2">Item-order-2</div>
+        <div class="item change-order">순서 바꾸기</div>
+    </div>
+
+
+    <!-- ============== -->
+    <div class="light-container" aria-hidden="true">
+        <div class="light red-light"></div>
+        <div class="light green-light"></div>
+        <div class="light blue-light"></div>
+    </div>
+</body>
+
+</html>
