@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../day6/exam.js"></script> 
+</head>
+<body>
+    <button type="button" id="index">클릭해주세요</button>
+    <br>
+    <button type="button" id="external">클릭해주세요2</button>
+    <br>
+    <button type="button" onclick="console.log('버튼3 클릭됨')">클릭해주세요3</button>
+    <!-- 스크립트 파일 import -->
+     <!-- <script src="../day6/exam.js"></script> 태드는 반드시 공백이 없어야 합니다. -->
+    <script>
+        let b=1;
+
+        
+
+
+        // 문서가 실행이 되어야만 효과가 있음 (재사용 가능셩 없음)
+        document.querySelector('#index').addEventListener('click',()=>{
+            alert('인라인 스크립트 적용됨');
+            console.log('ok');
+        })
+    </script>
+</body>
+</html>

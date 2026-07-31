@@ -1,169 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS3 애니메이션</title>
+    <link rel="stylesheet" href="css/product.css">
+
+
     <style>
-        .title-text {
+        #container {
+            max-width: 1000px;
+            margin: 20px auto;
+            width: 100%;
+        }
+
+        h1 {
             text-align: center;
-            margin-bottom: 2em;
-            opacity: 0.5;
         }
 
-        .travel-list {
-            display: block;
-            justify-content: left;
-            gap: 1.5em;
-            padding: 1em;
+        .prod-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            /* Flexbox를 사용하도록 설정 */
+            flex-wrap: wrap;
+            /* 항목이 컨테이너 너비를 초과하면 다음 줄로 이동 */
+            justify-content: space-around;
+            /* 항목 사이의 여백을 균등하게 분배 */
         }
 
-        .travel-card img {
-            width: 10em;
-            height: 180px;
+        .prod-list li {
+            padding: 0;
+            margin: 10px;
+            overflow: hidden;
+            flex-basis: calc(33.333% - 20px);
+            /* 3개의 항목을 한 줄에 표시, 항목 사이의 마진 고려 */
+            position: relative;
+        }
+
+        .prod-list img {
+            width: 100%;
+            /* 이미지가 항목의 너비에 맞게 조정 */
+            height: 200px;
+            /* 이미지 비율 유지 */
+            z-index: 5;
             object-fit: cover;
-            display: block;
-
         }
 
-        /* ========================================= */
-        a {
-            text-decoration: none;
-            color: #222;
-        }
-
-        #travel {
-            width: 1200px;
-            margin: 0 auto;
-        }
-
-        .title-text {
-            text-align: center;
-        }
-
-        .title-text>h2 {
-            font-size: 2.5em;
-            color: #919191;
-        }
-
-        .title-text>p {
-            font-size: 1.2em;
-            color: #ccc;
-        }
-
-        .travel-list {
+        .prod-list .caption {
+            position: absolute;
+            top: 200px;
+            width: 100%;
+            /* 캡션 너비를 항목 너비와 동일하게 조정 */
+            height: 200px;
             padding-top: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: all 0.6s ease-in-out;
+            z-index: 10;
         }
 
-        .travel-card img {
-            width: 150px;
-            height: 150px;
-            margin: 15px;
+        .prod-list li:hover .caption {
+            opacity: 1;
+            transform: translateY(-200px);
         }
 
-        .travel-card p {
-            font-size: 16px;
-        }
-    </style>
-
-
-
-
-    <!-- 
-
-
-    <style>
-        a {
-            text-decoration: none;
-            color: #222;
-        }
-
-        #travel {
-            width: 1200px;
-            margin: 0 auto;
-        }
-
-        .title-text {
+        .prod-list .caption h2,
+        .prod-list .caption p {
+            color: #fff;
             text-align: center;
         }
-
-        .title-text>h2 {
-            font-size: 2.5em;
-            color: #919191;
-        }
-
-        .title-text>p {
-            font-size: 1.2em;
-            color: #ccc;
-        }
-
-        .travel-list {
-            padding-top: 20px;
-        }
-
-        .travel-card {
-            width: 250px;
-            height: 340px;
-            float: left;
-            padding: 10px;
-            margin-right: 20px;
-            text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-        }
-
-        .travel-card img {
-            width: 150px;
-            height: 150px;
-            margin: 15px;
-            border-radius: 50%;
-            border: 0.3px solid #eee;
-        }
-
-        .travel-card p {
-            font-size: 16px;
-        } -->
     </style>
 </head>
 
 <body>
-
-    <div id="travel">
-        <div class="title-text">
-            <h2>여가 시간 즐기기</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, in! Lorem ipsum dolor sit amet.</p>
-        </div>
-        <div class="travel-list">
-            <div class="travel-card">
-                <a href="#">
-                    <img src="../imgs/book1.jpg">
-                    <h3>도심 투어</h3>
-                    <p>Lorem ipsum dolor sit. Lorem ipsum dolor sit.</p>
-                </a>
-            </div>
-            <div class="travel-card">
-                <a href="#">
-                    <img src="../imgs/book2.jpg">
-                    <h3>바다 즐기기</h3>
-                    <p>Lorem ipsum dolor sit amet. Consectetur adipisicing elit.</p>
-                </a>
-            </div>
-            <div class="travel-card">
-                <a href="#">
-                    <img src="../images.jpeg">
-                    <h3>등산 도전하기</h3>
-                    <p>Lorem ipsum dolor sit amet. Lorem, ipsum dolor</p>
-                </a>
-            </div>
-            <div class="travel-card">
-                <a href="#">
-                    <img src="../imgs/KakaoTalk_Photo_2026-07-27-16-21-23.png">
-                    <h3>관광지 투어</h3>
-                    <p>Lorem, ipsum dolor. Lorem ipsum dolor sit amet.</p>
-                </a>
-            </div>
-        </div>
+    <div id="container">
+        <h1>신상품 목록</h1>
+        <ul class="prod-list">
+            <li>
+                <img src="../imgs/book1.jpg">
+                <div class="caption">
+                    <h2>상품 1</h2>
+                    <p>상품 1 설명 텍스트</p>
+                    <p>가격 : 12,345원</p>
+                </div>
+            </li>
+            <li>
+                <img src="../imgs/book2.jpg">
+                <div class="caption">
+                    <h2>상품 2</h2>
+                    <p>상품 2 설명 텍스트</p>
+                    <p>가격 : 12,345원</p>
+                </div>
+            </li>
+            <li>
+                <img src="../images.jpeg">
+                <div class="caption">
+                    <h2>상품 3</h2>
+                    <p>상품 3 설명 텍스트</p>
+                    <p>가격 : 12,345원</p>
+                </div>
+            </li>
+        </ul>
     </div>
 </body>
 

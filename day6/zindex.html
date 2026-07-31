@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 
+        z index : 요소들이 겹칠때 쌓임(stack) 제어하는 속성
+        값으로는 음수,0 ,양수 또는 auto를 사용하는데, 음수로 갈수로 밑으로 쌓이게되고
+        양수는 반대로 쌓임. 기본값은 auto이고, 적용요소는 아래와 같음.
+        position이 relative, absolute, fixed, sticky, flex item, grid 아이탬이 적용대상임
+    -->
+
+    <style>
+        .wrap{
+            width: 270px;
+            height: 270px;
+            position: relative;
+        }
+        .z-box{
+            width: 180px;
+            height: 180px;
+            position: relative;
+            border: 5px solid;
+        }
+        .my-box{
+            top: 0px;
+            left: 0px;
+            background: rgba(0,102, 204, 0.7);
+            border-color: #000;
+            border-style: dashed;
+            z-index: 1000;
+        }
+
+        .z-2{
+            top: 40px;
+            left: 40px;
+            background: rgba(153,102, 255, 0.7);
+            border-color: rgba(153, 102,255);
+        }
+
+        .z-3{
+            top: 80px;
+            left: 80px;
+            background: rgba(255,51, 0, 0.7);
+            border-color: rgba(255,51, 0);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="z-box my-box">My DIV</div>
+        <div class="z-box z-2">z-2</div>
+        <div class="z-box z-3">z-3</div>
+    </div>
+    
+</body>
+</html>
