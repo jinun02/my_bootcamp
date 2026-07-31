@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        form 을 이용해서 국 영 수 과목을 입력받고,
+        학점 계산버튼을 누르면 alert를 이용해서 총 점, 평균을 출력하는코드 
+    -->
+
+    <style>
+
+    </style>
+</head>
+<body>
+    <form>
+        국어: <input type="text" id="kor"><br>
+        영어: <input type="text" id="eng"><br>
+        수학: <input type="text" id="math"><br>
+        <button type="button" onclick="calc();">계산하기</button>
+    </form>
+    
+    <script>
+        const calc = ()=>{
+            const kor =document.querySelector('#kor');
+            const eng =document.querySelector('#eng');
+            const math =document.querySelector('#math');
+
+            const total = kor+eng+math;
+            const avg = total/3;
+        }
+    </script>
+</body>
+</html>

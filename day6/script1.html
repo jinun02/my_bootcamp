@@ -7,7 +7,7 @@
     <script src="../day6/exam.js"></script> 
 </head>
 <body>
-    <button type="button" id="index">클릭해주세요</button>
+    <button type="button" id="inline">클릭해주세요</button>
     <br>
     <button type="button" id="external">클릭해주세요2</button>
     <br>
@@ -17,11 +17,9 @@
     <script>
         let b=1;
 
-        
-
 
         // 문서가 실행이 되어야만 효과가 있음 (재사용 가능셩 없음)
-        document.querySelector('#index').addEventListener('click',()=>{
+        document.querySelector('#inline').addEventListener('click',()=>{
             alert('인라인 스크립트 적용됨');
             console.log('ok');
         })

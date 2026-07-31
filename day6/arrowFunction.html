@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+
+    <script>
+        // function l1(a,b){
+        //     return a*b;
+        // }
+
+        const l1 = (a,b)=>a*b; // {}가 빠지면 리턴키워드를 생략 할 수 있다.
+        // 복잡한 로직은 {}를 이용하여 정의한다.
+        let res = l1(4,5);
+        const greets = function(){return 'hellow world'}   //()=>"hellow world";
+
+        const myfun = (x,y) =>{return x*y};
+        let res2 =myfun(2,4);
+
+
+        // 요소의 contents 를 작성하는 속성 innerHTML = 'value'
+        document.getElementById('demo1').innerHTML="결과 : "+res;
+        document.getElementById('demo2').innerHTML=greets();
+        document.getElementById('demo3').innerHTML=res2;
+
+        const person = {
+            name:'aa',
+            greets: ()=>{
+                return this.name;}
+            // 람다식은 여기서는 사용할수 없음
+            // {
+            //     return this.name
+            // }
+        }
+    </script>
+</body>
+</html>
