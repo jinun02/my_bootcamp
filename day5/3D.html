@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            /* 화면 전체 높이 */
+            display: flex;
+            justify-content: center;
+            /* 가로 중앙 */
+            align-items: center;
+            /* 세로 중앙 */
+        }
+
+        .stage {
+            perspective: 600px;
+        }
+
+
+        .stage {
+            perspective: 600px;
+        }
+
+        .cube {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: cube-rotate 4s infinite linear;
+        }
+
+        .face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.9;
+        }
+
+        .front {
+            background: crimson;
+            transform: translateZ(50px);
+        }
+
+        .back {
+            background: royalblue;
+            transform: rotateY(180deg) translateZ(50px);
+        }
+
+        .right {
+            background: gold;
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .left {
+            background: seagreen;
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        .top{
+            background-color: aquamarine;
+            transform: rotateX(90deg) translateZ(50px);
+        }
+        .bottom{
+            background-color:coral;
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        @keyframes cube-rotate {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face right"></div>
+        <div class="face left"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+    </div>
+</body>
+
+</html>

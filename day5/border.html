@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* td 의 스타일을 다음처럼 정의 하세요 
+        border : 3px solid 로 컬러는 red blue orange green 으로
+        padding 은 0.5 em 2em으로 주세여
+        */
+        /* 
+        border-spacing : 테이블에서만 사용되며 셀과 셀 사이의 간격을 지정합니다.
+        주의: border-collapse속성이 seperate로 설정 되었을때만 적용됨.
+        */
+        .collapse{
+            border-collapse: collapse;
+        }
+
+        .separate{
+            border-collapse: separate;
+            margin: 1em;
+            border-spacing: 10px;
+        }
+
+        table{
+            display: inline-table;
+            margin: 1em;
+        }
+
+        td{
+            border: 3px solid;
+            border-color: red blue orange green; /*순서는 위 오른쪽 밑 왼쪽*/
+            padding: 0.5em 2em;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <table class="separate">
+        <caption>
+            <code>border-collapse: separate</code>
+        </caption>
+        <tr>
+            <td>Cell 1.1</td>
+            <td>Cell 1.2</td>
+        </tr>
+        <tr>
+            <td>Cell 2.1</td>
+            <td>Cell 2.2</td>
+        </tr>
+        <tr>
+            <td>Cell 3.1</td>
+            <td>Cell 3.2</td>
+        </tr>
+    </table>
+    <table class="collapse">
+        <caption>
+            <code>border-collapse: collapse</code>
+        </caption>
+        <tr>
+            <td>Cell 1.1</td>
+            <td>Cell 1.2</td>
+        </tr>
+        <tr>
+            <td>Cell 2.1</td>
+            <td>Cell 2.2</td>
+        </tr>
+        <tr>
+            <td>Cell 3.1</td>
+            <td>Cell 3.2</td>
+        </tr>
+    </table>
+    <hr>
+    <img src="../images.jpeg" alt="하트" style="border-radius: 30px;">
+</body>
+
+</html>

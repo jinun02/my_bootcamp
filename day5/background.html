@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+    배경스타일을 저장하는 CSS 요소임    
+    속성으로는 attachment, clip, color, image, origin, postion, repeat, size가 있음
+
+    background: 
+    -->
+    <!-- /* 포지션, 사이즈가 나와야함.  */ -->
+
+    <style>
+        div {
+            height: 200px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background: url(../imgs/images-2.jpeg);
+            background-attachment: local;
+            overflow: auto;
+            padding: 1em;
+        }
+
+        div.a {
+            border: 10px dashed orange;
+            height: 200px;
+            /* background: no-repeat center / 80% url(../imgs/images-2.jpeg);  center / 80% 처럼 포지션 뒤에 사이즈가 나와야함 */
+            width: 200px;
+            /* background: salmon url(../imgs/images-2.jpeg); */
+            /* 컬러 표기 방법만 알아두면 됩니다.*/
+
+        }
+
+        div.b {
+            /* background-image: url(../imgs/KakaoTalk_Photo_2026-07-27-16-44-13.jpeg); */
+            /* background-image: linear-gradient(red, blue); */
+        }
+
+        div.c {
+            /* background: url(../imgs/images-2.jpeg) repeat-x; */
+        }
+
+        div.d {
+            /* 포지션 */
+            background-position: top 50px right 30px;
+            background-repeat: no-repeat;
+        }
+
+        div.e{
+            background-size: contain;
+
+        }
+
+        div.f{
+            /* attachment : 배경이미지가 어느 기준에 부착 될지를 결정합니다.
+            요소의 배경 영역에 부착되어서 scroll될지(default), 또는 viewport에 고정(fixed) 되어 부착되는지,
+            또는 컨텐츠(local)와 함께 부착되어 스크롤 될지를 결정하는 속성입니다
+             */
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-attachment:fixed;
+
+        }
+
+        div.g{
+            background-attachment: local;
+
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="a">
+        hello
+    </div>
+
+    <div class="b">
+        hello
+    </div>
+
+    <div class="c">
+        hello
+    </div>
+
+    <div class="d">
+        hello
+    </div>
+
+    <div class="e">
+        hello
+    </div>
+
+    <div class="f">
+        hello
+    </div>
+
+
+    <div class="g">
+        hasfsafsdafsdafsaf
+    </div>
+</body>
+
+</html>

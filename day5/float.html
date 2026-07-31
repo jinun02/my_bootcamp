@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        float : 요소를 일반적인 문서 흐름에서 벗어나 floating 하여
+        왼쪽 또는 오른쪽에 배치하겠다는 의미입니다.
+        이 말은 주변의 텍스트나 인라인 컨텐츠는 그 주위를 따라 배치하도록
+        지정 할 수 있다는 의미 입니다.
+        주의 : position 이 absolute 이거나 fixed로 되어지 ㄴ경우엔 적용안됨
+        플랙스 컨테이너에서도 적용안됨.
+
+    -->
+
+    <style>
+        .warpper {
+            overflow: hidden;
+        }
+
+        .container2 {
+            padding: 1em;
+            border: 3px solid;
+            overflow: hidden;
+
+        }
+
+        .float-me {
+            padding: 1em;
+            background-color: black;
+            color: white;
+            float: left;
+
+        }
+
+        p {
+            color: silver;
+            margin: 0;
+        }
+
+        .float-left {
+            float: left;
+            background-color: black;
+            color: aliceblue;
+        }
+
+        .clear-target {
+            /* 적용된 float을 삭제할때 사용함.*/
+            color: silver;
+            clear: both;
+        }
+
+        .img1 {
+            float: left;
+            margin-right: 40px;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            border: 2px solid navy;
+            float: left;
+        }
+
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            border: 2px solid navy;
+            float: right;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <section class="container">
+        <div class="float-me">Float me</div>
+        <p class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident,
+            sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+    </section>
+
+    <div class="warpper">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <section class="container2">
+            <div class="float-left">Float left</div>
+            <p class="clear-target">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.....
+            </p>
+        </section>
+
+    </div>
+</body>
+
+</html>

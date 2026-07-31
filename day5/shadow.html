@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        요소박스에 그림자 효과를 적용하는 속성..
+
+    -->
+    <style>
+        .text {
+            font-size: 70px;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.4);
+            text-shadow: 5px 5px red;
+        }
+
+        .box {
+            max-width: 230px;
+            height: 200px;
+            border-radius: 15px;
+            background-color: wheat;
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.4s;
+        }
+
+        .box:hover {
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+        }
+
+        #costom-caret-input {
+            font-size: 15px;
+            padding: 10px;
+            border: 2px solid red;
+            border-radius: 5px;
+            caret-color: red;
+
+        }
+
+        .p2 {
+            color: aqua;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(red, blue);
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            width: 200px;
+            padding: 0.5em 0.7em;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-bottom: 0.7em;
+            transition: all 0.2s;
+        }
+
+        li:hover {
+            color: red;
+            box-shadow: 0 1px 1px red;
+        }
+    </style>
+</head>
+
+<body>
+    <P class="text">텍스트입니다.</P>
+    <div class="box">
+
+    </div>
+    <input type="text" id="costom-caret-input" placeholder="타이핑하세요..">
+    <p class="p2">텍스트에 그라데이션 주기.</p>
+
+
+    <ul>
+        <li style="cursor: auto;">auto</li>
+        <li style="cursor: default;">default</li>
+        <li style="cursor: none;">none</li>
+        <li style="cursor: context-menu;">context-menu</li>
+        <li style="cursor: help;">help</li>
+        <li style="cursor: pointer;">pointer</li>
+        <li style="cursor: progress;">progress</li>
+        <li style="cursor: wait;">wait</li>
+        <li style="cursor: cell;">cell</li>
+        <li style="cursor: crosshair;">crosshair</li>
+        <li style="cursor: text;">text</li>
+        <li style="cursor: url(heart.png),auto;">url: 이미지 커스텀 커서</li>
+        <li style="cursor: vertical-text;">vertical-text</li>
+        <li style="cursor: alias;">alias</li>
+        <li style="cursor: copy;">copy</li>
+        <li style="cursor: move;">move</li>
+        <li style="cursor: no-drop;">no-drop</li>
+        <li style="cursor: not-allowed;">not-allowed</li>
+        <li style="cursor: grab;">grab</li>
+        <li style="cursor: grabbing;">grabbing</li>
+        <li style="cursor: e-resize;">e-resize</li>
+        <li style="cursor: n-resize;">n-resize</li>
+        <li style="cursor: ne-resize;">ne-resize</li>
+        <li style="cursor: nw-resize;">nw-resize</li>
+        <li style="cursor: s-resize;">s-resize</li>
+        <li style="cursor: se-resize;">se-resize</li>
+        <li style="cursor: sw-resize;">sw-resize</li>
+        <li style="cursor: w-resize;">w-resize</li>
+        <li style="cursor: ew-resize;">ew-resize</li>
+        <li style="cursor: ns-resize;">ns-resize</li>
+        <li style="cursor: nesw-resize;">nesw-resize</li>
+        <li style="cursor: nwse-resize;">nwse-resize</li>
+        <li style="cursor: col-resize;">col-resize</li>
+        <li style="cursor: row-resize;">row-resize</li>
+        <li style="cursor: all-scroll;">all-scroll</li>
+        <li style="cursor: zoom-in;">zoom-in</li>
+        <li style="cursor: zoom-out;">zoom-out</li>
+    </ul>
+</body>
+
+</html>

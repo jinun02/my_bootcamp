@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        display : 표시 방식을 설정하는 속성입니다    
+        값으로는 되게 많은데 나머진 차아서 해보고
+        아래것들만 볼게요
+
+        nome: 요소표시하지 않음
+        contaents : 요소의 컨테이너 박스는 표시않고, 컨텐츠만 표시함
+        block : 다 알거고..
+        inline: 알거고,,
+        inline-block : inline과 동일하지만 컨테이너 영역을 지정할 수 있는것
+        flex, inline-flex(문서흐름은 inline 처럼 배치되지만 내부 display는 플랙스가 적용되어
+        플랙스 컨테이너를 생성함.)
+    -->
+    <style>
+        .ex {
+            display: contents;
+
+        }
+        div{
+            width: 70px;
+            height: 100px;
+            border: 1px solid red;
+            display:inline;
+        }
+    </style>
+</head>
+
+<body>
+    <ol>
+        <li>A</li>
+        <li class="ex">B</li> <!-- 화면에 표시하지 않습니다. -->
+        <li>C</li>
+        <li>D</li>
+    </ol>
+    <button class="ex" type="button">Button</button>
+    <hr>
+    <p class="ex">Hello <strong>World</strong></p>
+    <hr>
+    <a class="ex" href="https://www.google.com/" target="_blank">Google로 이동하기</a>
+    <hr>
+
+    <!-- 콘텐츠가 없다면, display: none 방식이 적용됩니다. -->
+    <p class="ex"></p>
+    <hr>
+    <input class="ex" type="text">
+
+    <div>
+        div1
+    </div>
+
+    <div>
+        div2
+    </div>
+
+    <div>
+        div3
+    </div>
+
+</body>
+
+</html>
