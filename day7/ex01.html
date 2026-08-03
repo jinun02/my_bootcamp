@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- // input 을 이용해서 사용자의 암호를 입력받으시오 
+    // 입력한 암호 옆에 검증 이라는 버튼을 생성후 아 버튼이 눌러지면
+    // 다음과 같은 조건을 정의하시오 길이는 6~12자 사이여야하고
+    // 반드시 대문자 하나와 숫자가 포함되어있어야합니다.
+    // 만약 이 조건이 부함합면 true 부합하지 않으면 false를 출력시키세요
+    // 정규화식 사용하지 마세요-->
+</head>
+
+<body>
+    <input type="password" id="pwInput" placeholder="비밀번호 입력">
+    <button id="checkBtn">검증</button>
+
+    
+    <script>
+        document.getElementById("checkBtn").addEventListener("click", function () {
+            const pw = document.getElementById("pwInput").value;
+
+
+            const lengthOk = pw.length >= 6 && pw.length <= 12;
+
+
+            let hasUpper = false;
+
+            let hasNumber = false;
+
+            for (let i = 0; i < pw.length; i++) {
+                const ch = pw[i];
+
+                if (ch >= "A" && ch <= "Z") {
+                    hasUpper = true;
+                }
+
+                if (ch >= "0" && ch <= "9") {
+                    hasNumber = true;
+                }
+            }
+
+            const result = lengthOk && hasUpper && hasNumber;
+
+            console.log(result); // 조건 부합하면 true, 아니면 false
+        });
+    </script>
+</body>
+
+</html>

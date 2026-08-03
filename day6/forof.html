@@ -39,17 +39,119 @@
         //     }
         // }
         // const gg = me.greet();
-        
+
         // console.log(gg);
         // [Log] 안녕 나는 진헌이고 나이는 30야
-        
-        
+
+
         //map
         //set
         // for(const ele of listEle){
         // console.log(ele.innerHTML);}
 
-    </script>
+
+
+        const baseURL = "https://api.exam.com"
+        // 특정서버에 특정 정보를 백틱을 사용하여 보내는 방법을 알아봅시다.
+        const endPoint1 = `&{baseURL}/user`;
+        //기본 UPL에 탬플릿 리터럴 사용해서 요청 PATH URL 생성
+        console.log(endPoint1);
+
+        //URL에 변수를 삽입합니다. 
+        // 특정 서버URL에 특정 정보를 객체로 만들어서 Query string 로 보내는 작업
+        //query String 생성하기
+        const params = {
+            category: "books",
+            limit: 10,
+            sort: "desc"
+        };
+
+        // baseURL 의 /search? url 에 query string 을 보내도록 const endPint4 변수를 생성하시오
+        //const endPint4 = `${baseURL}/search?${queryString}`;
+        // 탬플릿 HTML을 생성해서 동적으로 HTML를 구라눈 방법.
+        const title = 'welcome';
+        const contant = "hellow ";
+        const htmlTamplate1 = `
+            <div class="container">
+                <h1>${title}</h1>
+                <p>${contant}</p>
+            </div>
+            `;
+        const user = {
+            name: "진헌",
+            age: 30,
+            email: "ttttttt"
+        };
+
+        const html2 = `
+            <div class="container">
+                <h1>${user.name}</h1>
+                <p>${user.age}</p>
+                <p>${user.email}</p>
+            </div>
+        `;
+
+        const todos = [
+            { id: 1, title: "식료품 사기" },
+            { id: 2, title: "집 청소" },
+            { id: 3, title: "빨래 하기" }
+        ];
+        const todolist = `
+        <ui>
+            ${todos.map(todo => `<li>${todo.title}<li>`).join("")}
+        </ui>
+        `;
+        console.log(todolist);
+
+
+        // 문자열 : 객체로 표현되면, 속성과 매서드가 있다
+        //' string '.trim().length 으로 공백없앨수있음.
+        //
+
+// //         items.foreach(item=>{
+//     const paddedName=item.name.padEnd(nameWidth.fillChar);
+//     const paddedprice =String(item.price)
+        
+
+ 
+// 자바 스크립트 filter함수
+// const keyword = ["java","html","css"];
+// const userinput ="java";
+
+// keyword.filter
+// < function filter() {
+//     [native code]
+// }
+// keyword.filter(keyword=>{
+//     return keyword.toLowerCase()===userinput.toLowerCase();
+// });
+
+
+
+
+
+// map 콜백함수르 ㄹ사용하여 다음처럼 나오도록 정의하세요
+
+// [
+//     {name:"hello"},
+//     {name:"helloWord"},
+//     {name:"hello"}
+// ]
+
+
+
+// const data = [
+//     {name: "Hello"},
+//     {name: "HelloWorld"},
+//     {name: "hello"}
+// ];
+
+
+
+
+
+
+</script>
 </body>
 
 </html>
