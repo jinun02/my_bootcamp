@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+    foreach는 map() 과 함께 가장 많이 쓰이는 함수임..
+    전체를 순회하면서. 값을 리턴하고, 이 값을 가지고 처리해야할 콜백을 정의하고, 필요에 따라서 
+    this 로 사용할 객체를 넘겨서 사용할 수 있도록 정의하는 함수임.
+
+    콜백 함수에는 다음과 같은 파라미터를 적용 가능함.
+    currentValue(필수) : 처리할 현재요소 ,,이 매개변수를 통해 요소에 접근 가능함
+    index(옵션) : 처리할 현재 요소의 index.. 인덱스에 접근시 사용함
+    arr(옵션) : 이 함수를 호출한 배열 그 자체.. 원본 배열에 접근 할 수 있음.
+    forEach((element=>{})),
+    forEach((element[,index]=>{}))
+    forEach((element[,index,[ array]]=>{}))
+    -->
+    <!-- // forEach() 는 반환되는 리턴 값은 항상undefined 입니다 -->
+
+
+    <!-- 배열요소를 문자열로 변환해서 새로운 배열 생성해보기  greet안에 names push로 넣기-->
+    <script>
+        const names = ['aaa', 'bbb', 'ccc'];
+        const greet = [];
+
+        names.forEach(name => {
+            greet.push(`${name}`);
+        });
+
+
+
+// > // map()은 배열을 순회해서 각 요소를 콜백함수로 적용, 처리해 모은 새로운 배열을 리턴
+// < undefined
+// > // map()은 배열을 순회해서 각 요소를 콜백함수로 적용, 처리해 모은 새로운 배열을 리턴하기위한 함수
+
+        // 모든사람의 나이를 5 증가 시키시오
+        //         const people = [
+        //     {name: 'Alice', age: 30},
+        //     {name: 'Bob', age: 25},
+        //     {name: 'Charlie', age: 35}
+        // ];
+
+
+
+
+
+
+
+        //filter()함수 : 조건이 걸려있는 map()와 같은 기능
+
+    </script>
+</body>
+
+</html>
