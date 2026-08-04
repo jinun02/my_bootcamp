@@ -1,12 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h2> 자바 스크립트를 배워봅시다 </h2>
-    
+
+
+
+    <script>
+        // // const riv = [1, 2, 3];
+        // // riv.reverse();
+        // // console.log(riv);
+
+        // // const copyArr = riv.slice();
+        // // console.log(copyArr);
+
+        // // riv.reverse();
+        // // console.log(riv);
+
+
+        // // spread 와 rest문법에 대해서 알아봅시다. 꼭 알아야합니다.
+        // // spread 는 객체또는 배열에 모두 적용이 되는 문법입니다.
+        // // 말 그대로 펼치는, 퍼뜨리는 문법입니다.
+        // const slime = {
+        //     name: "슬라임"
+        // };
+        // const slimeCute = {
+        //     name: "슬라임",
+        //     attr: 'cute'
+        // };
+        // const slimeYellow = {
+        //     name: "슬라임",
+        //     attr: 'cute',
+        //     color: 'Yellow'
+        // };
+
+        // const spSlime1 = {
+        //     ...slime,
+        //     attr: '슬라임',
+        // };
+
+        // const animals = ['개', '고양이', '말'];
+
+        // const spAni = [...animals, '구피'];
+
+
+        // // rest : 특정 요소만 제외한 나머지를 복제 하도록 하는 문법
+
+        // slimeYellow;
+
+        // // const {color,...rest}=slimeYellow;
+        // // console.log(rest);
+
+        // // const{color, ...slimeCute}=slimeYellow;
+
+        // const numbers = [0, 1, 2, 3, 4, 5, 6];
+
+        // function sum(a, b, c, d, e, f, g) {
+        //     let sum = 0;
+        //     if (a) sum += a;
+        //     if (b) sum += b;
+        //     if (c) sum += c;
+        //     if (d) sum += d;
+        //     if (e) sum += e;
+        //     if (f) sum += f;
+        //     if (g) sum += g;
+        //     return sum;
+        // };
+
+        // const res = sum(1, 2, 3, 4, 5);
+
+        // function restSum(...rest) {
+        //     return rest
+        // };
+
+        // const res2 = restSum(1.2, 3);
+
+
+        // // function restSum(fir,sec,...rest){
+        // //      return rest
+        // // };
+
+        // // function restSum(fir,sec,...rest){
+        // //      console.log(fir);
+        // //      console.log(sec);
+        // //      console.log(rest);
+        // // };
+
+        // //rest함수는 (...)이걸로 사용함
+        // const numbers1 = [10, 20, 30, 40];
+        // const [myfirst, ...otherNums] = numbers1;
+
+        // const user = { name: '김진헌', age: 30, job: 'stu', city: '춘천' };
+
+        // const { name, ...otherinfo } = user;
+
+        // // 구조분해 할당이라는 개념을 배울겁니다.
+        // const ironman = {
+        //     name: '스타크',
+        //     actor: '로다주',
+        //     alias: '아이언맨'
+        // };
+        // const capAme = {
+        //     name: '스티븐 로저스',
+        //     actor: '크리스 에반스',
+        //     alias: '갭틴아메리카'
+        // };
+        // function print(hero) {
+        //     const text = `${hero.name}(${hero.actor}) 역할을 맡은 배우는 ${hero.alias} 입니다`;
+        //     console.log(text);
+        // }
+
+        // function print(alias,name,actor) {
+        //     // const { alias, name, actor } = hero;
+        //     const text = `${alias}(${name}) 역할을 맡은 배우는 ${actor} 입니다`;
+        //     console.log(text);
+        // }
+
+        // const obj ={a:1,b:2};
+        // const{a,b}=obj;
+
+        // function print({a,b,c}){
+        //     console.log(a);
+        //     console.log(b);
+        //     console.log(c);
+        // }
+
+        // sort는 원본배열이 바뀜
+        
+        // 숫자를 정형할때는 정렬기준을 나열한 콜백함수를 반드시 호출해줘야합니다.
+        //콜백 함수는 숫자를 정렬할 기준을 정의하는데, 두 수를 파라미터로 받아서
+        // 순차대로 -(빼기) 해주면 오름차순으로 정렬됩니다.
+        // ex>  function compareNumber(a,b){
+        //      return a-b;}
+
+
+        // some 와 반대되는 every
+        // slice
+        //splice 은 원본에 제거하거나 추가하거나할때 사용
+        // concat : 배열끼리 합칠때(원본배열은 바뀌지 않음.)
+    </script>
+
 </body>
+
 </html>

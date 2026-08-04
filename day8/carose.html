@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .carousel-container {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 0 auto;
+            overflow: hidden;
+            /* 넘치는 슬라이드 숨김 */
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+            /* 부드러운 이동 효과 */
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            /* 부드러운 반응형 너비 고정 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <!-- 슬라이드 아이템들 -->
+            <div class="carousel-slide" style="background: #ff7675;">1</div>
+            <div class="carousel-slide" style="background: #74b9ff;">2</div>
+            <div class="carousel-slide" style="background: #55efc4;">3</div>
+        </div>
+
+        <!-- 이동 버튼 -->
+        <button class="carousel-btn prev">Prev</button>
+        <button class="carousel-btn next">Next</button>
+
+        <script>
+
+            const track = document.querySelector(".carousel-track");
+            const slides = track.children;
+            // 두개의 버튼을 찾아서 prevBtn, nextBtn 변수에 담으시오
+
+            const prevBtn = document.querySelector(".carousel-btn.prev");
+            const nextBtn = document.querySelector(".carousel-btn.next");
+
+            // 앞 뒤로 붙일 슬라이드 복사 해보
+            const firstClone = slides[0].cloneNode(true);
+            const lastClone = slides[slides.length-1].cloneNode(true);
+
+            track.append(firstClone); //append는 기존거 맨 뒤에다 붙힌다는 것
+            track.insertBefore(lastClone,slides[0]); // berore앞에 붙힌다는 말
+            
+            // 변수 재정의 및 초기 위치 설정하기.
+            const allSlides = track.children;
+            let currentIndex =1;
+            // 연속 클릭 방지를 위한 flag 설정
+            let isTransitioning=false;
+
+            track.style.transform= `translate(-${currentIndex*100}%)`;
+
+            function moveSlide(index){
+                if(isTransitioning)return;
+
+                isTransitioning=true;
+
+                track.style.transition=`transform 0.5s ease-in-out`;
+                track.style.transform=`translateX(-${index*100}%)`;
+                currentIndex=index;
+
+            }
+            // transition이 끝난후 실행할 코드 정의
+            track.addEventListener(`transitionend`,()=>{
+                isTransitioning=false;
+
+                console.log(allSlides.length);
+
+                if(currentIndex === allSlides.length -1){
+                    track.style.transition=`none`;
+                    currentIndex=1;
+                    track.style.transform=`translateX(-${currentIndex*100}%)`;
+                }
+                if(currentIndex===0){
+                    track.style.transition=`none`;
+                    currentIndex=allSlides.length-2;
+                    track.style.transform=`translateX(-${currentIndex*100}%)`;
+                }
+            })
+
+            nextBtn.addEventListener("click",()=>moveSlide(currentIndex +1));
+            prevBtn.addEventListener("click",()=>moveSlide(currentIndex -1));
+            console.log(firstClone);
+
+        </script>
+    </div>
+</body>
+
+</html>
