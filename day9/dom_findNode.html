@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p id="hello">환영.. 더운 날씨</p>
+
+    <script>
+        const changeColor = (color) => {
+            const hello = document.getElementById('hello');
+            hello.style.color = color;
+
+            document.getElementsByTagName(); // 테그 이름을 기준으로 찾아냄
+        };
+
+        
+
+    </script>
+    <button type="button" onclick="changeColor('red');">빨간색</button>
+    <button type="button" onclick="changeColor('blue');">파란색</button>
+
+</body>
+
+</html>
