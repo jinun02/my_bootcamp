@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <p>자손 요소임</p>
+    </div>
+
+    <ul id="list">
+        <li>라면</li>
+        <li>김밥</li>
+        <li>만두</li>
+    </ul>
+    <p>요소의 개수 : <strong id="li-length-val">3</strong></p>
+    <button type="button" id="addButton">신메뉴 추가</button>
+    <script>
+        const ma = document.querySelectorAll(".container p");
+        console.log(ma);
+
+        const list = document.querySelectorAll("li");
+        for (const item of list) {
+            console.log(item.textContent);
+        }
+
+
+        // 버튼 클릭시 li 요소 추가하기
+        // 이벤트 연결 
+        // document.getElementById("addButton").addEventListener("click", () => {
+        //     // li 노드 생성
+        //     const newLi = document.createElement("li");
+        //     newLi.textContent = '신메뉴';
+
+
+        //     // ul > li 추가하기
+        //     document.getElementById("list").appendChild(newLi);
+
+        //     const listLength = list.length;
+        //     document.getElementById('li-length-val').textContent = listLength;
+        // })
+    </script>
+
+    <input type="text" id="menuInput" placeholder="메뉴 이름 입력">
+    <script>document.getElementById("addButton").addEventListener("click", () => {
+            const input = document.getElementById("menuInput");
+            const menuName = input.value.trim();
+
+            if (!menuName) {
+                alert("메뉴 이름을 입력해주세요");
+                return;
+            }
+
+            const newLi = document.createElement("li");
+            newLi.textContent = menuName;
+            document.getElementById("list").appendChild(newLi);
+
+            const listLength = document.querySelectorAll("#list li").length;
+            document.getElementById('li-length-val').textContent = listLength;
+
+            input.value = "";
+            input.focus();
+        });
+    </script>
+
+</body>
+
+</html>

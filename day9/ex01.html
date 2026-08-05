@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 검색어 입력받는데 만약에 div(안녕하세요..만나서 반가워요)에 있는 단어면 하이라이트 기능 넣기 -->
+</head>
+
+<body>
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+
+    <div id="content">안녕하세요..만나서 반가워요</div>
+    <input type="text" id="search" placeholder="검색어 입력">
+
+    <script>
+
+        const content = document.getElementById("content");
+        const search = document.getElementById("search");
+
+
+        const originalText = content.textContent; // 원본 텍스트 저장
+
+        search.addEventListener("input", () => {
+            const keyword = search.value.trim();
+
+            // 검색어가 비었거나, 원본에 포함되지 않으면 원본 그대로
+            if (!keyword || !originalText.includes(keyword)) {
+                content.textContent = originalText;
+                return;
+            }
+
+            // 검색어를 하이라이트 span으로 감싸서 교체
+            content.innerHTML = originalText.replace(
+                keyword,
+                `<span class="highlight">${keyword}</span>`
+            );
+        });
+    </script>
+</body>
+
+</html>
