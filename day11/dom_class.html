@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+    DOM요소의 클래스 속성 다루기
+        classList.add() : 요소에 클래스 값 추가
+            - 하나 or 하나 이상의 값을 한번에 반환 할 수 없다.
+            - 만약 요소에 클래스 속성이 없다면 class 속성을 새로 만들고 값도 추가한다.
+            - 클래스 값이 이미 존재한다면, 아무 동작도 하지 않는다.
+        classList.remove() : 요소에 클래스 값 제거
+        classList.replace() : 클래스 값 교체
+        classList.conrains() : 클래스 값 존재 여부 확인
+    -->
+
+    <style>
+        .bold{
+            font-weight: 600;
+        }
+        .bg-red{
+            background-color: red;
+        }
+        .color-violet{
+            color: violet;
+        }
+    </style>
+</head>
+<body>
+    <p class="bold">클릭하면bg-red 추가됨</p>
+    <button type="button" id="btn1">클래스 값 추가하기</button>
+    <button type="button" id="btn2">클래스 값 지우기</button>
+
+    <p id="p2">Toggle 을 이용한 스타일 클래스</p>
+    <button type="button" id="btn3">스타일 토글하기</button>
+    <script>
+        const ele=document.querySelector('p');
+        const btn1=document.getElementById('btn1');
+        const btn2=document.getElementById('btn2');
+        const p2=document.getElementById('p2');
+        const btn3=document.getElementById('btn3');
+
+        // 토글 시키기
+        btn3.addEventListener('click',()=>{
+            p2.classList.toggle("bg-red");
+            setInterval(()=>{
+                p2.classList.replace('bg-red','color-violet');
+            },3000);
+            
+        })
+
+        btn1.addEventListener("click",()=>{
+            ele.classList.add('bg-red',"color-violet");
+        })
+
+        btn2.addEventListener("click",()=>{
+            ele.classList.remove('bg-red',"color-violet");
+        })
+
+
+
+    </script>
+    
+</body>
+</html>

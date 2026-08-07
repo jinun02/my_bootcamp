@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 모달 배경 (전체를 어둡게 덮음) */
+        .modal-overlay {
+            display: none;
+            /* 기본적으로 숨김 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 모달 콘텐츠 박스 */
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 모달이 활성화되었을 때 보여주는 클래스 */
+        .modal-overlay.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="openBtn">모달 열기</button>
+
+    <!-- 모달 본체 (기본적으로 숨겨진 상태) -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <h2>안녕하세요! 👋</h2>
+            <p>자바스크립트 이벤트로 제어하는 모달창입니다.</p>
+            <button id="closeBtn">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        const openBtn = document.getElementById("openBtn");
+        const closeBtn = document.getElementById("closeBtn");
+        const modalOverlay = document.getElementById("modalOverlay");
+
+        // 모달 열기 함수정의
+        function openModal(){
+            //active 클래스를 오버레이에 추가하도록
+           modalOverlay.classList.add("active");
+        }
+
+        function closeModal(){
+            modalOverlay.classList.remove("active");
+        }
+
+        openBtn.addEventListener("click",openModal);
+        closeBtn.addEventListener("click",closeModal);
+        modalOverlay.addEventListener("click",(event)=>{
+            if(event.target === modalOverlay){
+                closeModal();
+            }
+        });
+
+        window.addEventListener('keydown',function(e){
+            if(e.key=='Escape'&& modalOverlay.classList.contains('active')){
+                closeModal();
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

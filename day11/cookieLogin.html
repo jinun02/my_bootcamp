@@ -39,7 +39,7 @@
             now.setTime(now.getTime() + (days * 24 * 60 * 60 * 1000));
             const expires = "expires=" + now.toUTCString();
             // 쿠키던지기
-            document.cookie = `${name}=${encodeURIComponent(value)};${expires};path/`;
+            document.cookie = `${name}=${encodeURIComponent(value)};${expires};path=/`;
         }
 
         function getCookie(name) {
@@ -63,6 +63,11 @@
             return '';
         }
 
+        function deleteCookie(name){
+            // 쿠키를 지울떄는 key= 형태로, expires 는 과거날짜로 설정해서 다시 보내준다
+            document.cookie=name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        }
+
 
         function handleLogin() {
             const userNameInput = document.getElementById('username').value;
@@ -75,6 +80,12 @@
             // 쿠키지정하는 함수 호출하기.. 유효기간은 1일로 설정하기
             setCookie('username', userNameInput, 1);
             // 로그인 여부 상태 함수 호출하기
+            checkLoginStatus();
+        }
+
+        function handleLogout(){
+            // 쿠키삭제 및 로그인 상태 재 호출
+            deleteCookie('username');
             checkLoginStatus();
         }
 
@@ -96,9 +107,13 @@
             }else{
                 loginSection.classList.remove('hidden');
                 dashboardSection.classList.add('hidden');
-                document.getElementById('username'.value='');
+                document.getElementById('username').value='';
             }
         }
+
+        // 페이지가 로드 될때, 로그인 상태 확인해주기
+        window.onload=checkLoginStatus;
+
     </script>
 
 </body>
