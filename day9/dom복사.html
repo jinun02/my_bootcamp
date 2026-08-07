@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        cloneNode() : 동일 문서 내에서 호출한 DOM 노드를 복사하여 복제본 리턴함.
+        파라미터에 따라서 자손 노드까지 복제 가능함
+    -->
+    <div id="org">
+        <div id="f">first</div>
+        <div id="s">second</div>
+    </div>
+
+    <script>
+        const org=document.getElementById("org").cloneNode(true);
+        const org2=document.getElementById("org").childNodes;
+        console.log(org2);
+    </script>
+    
+</body>
+</html>

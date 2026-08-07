@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        insertBefore() : 특정 부모 노드 내에서 지정한 자식 노드 바로 앞에 새로운 노드를 삽입함.
+    -->
+</head>
+
+<body>
+
+    <div id="parent">
+        <div id="first">First</div>
+        <div id="second">Second</div>
+        <div id="me" style="color: red;">me</div>
+    </div>
+    <hr>
+    <button type="button" id="insert-btn">div의 자식 요소 삽입하기</button>
+    <script>
+        const btn =document.getElementById('insert-btn');
+        btn.addEventListener('click',()=>{
+            //부모노드 Ref
+            const parent=document.getElementById("parent");
+
+            if(parent){
+                const newEle=document.createElement('p');
+                newEle.textContent='새로운 택스트';
+                // 참조할 자식 노드 찾아내기
+                const refNode = parent.children[4];
+
+                parent.insertBefore(newEle,refNode);
+            }
+        })
+    </script>
+</body>
+
+</html>

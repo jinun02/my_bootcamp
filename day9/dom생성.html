@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        createElement() : 새로운 HTML 요소 생성
+        createTextNode() : 새로운 택스트 노드 생성
+        createDocumentFragment() : 새로운 DocumentFragment생성 
+
+        DocumentFragment() 는 가상의 매모리에 존재하는 임시적인 DOM조각임 우너하는 main DOM트리에 직접 추가 또는 삽입을 해야 웹페이지에 표시됨.
+        얘를 사용하는 이유는 성능 향상에 유리하기때문임. 즉 미리 만들어 놓고 필요시에 끼워넣는 방식을 사용하기 때문에 성능에 유리함.
+    -->
+        <div id="my-div" style="border: 1px solid red; margin-bottom: 1em;">이건 div내용입니다</div>
+        <button type="button" id="insert-btn">텍스트 추가</button>
+        <button type="button" id="add">아이탬 추가하기</button>
+        <ul id="item-list"></ul>
+
+    <script>
+
+        const addBtn =document.getElementById('add');
+
+        addBtn.addEventListener("click",()=>{
+            const fragment=document.createDocumentFragment();
+
+            for(let i=0; i<5; i++){
+                const newItem=document.createElement("li");
+
+                newItem.textContent=`item ${i}`;
+
+                fragment.appendChild(newItem);
+            }
+
+            document.getElementById('item-list').appendChild(fragment);
+        })
+
+
+        document.getElementById("insert-btn").addEventListener('click',()=>{
+            const myDiv=document.getElementById("my-div");
+            if(myDiv){
+                const textNode=document.createTextNode("오늘 정말 더움");
+
+                myDiv.appendChild(textNode);
+            }
+        })
+
+        //div 요소를 생성하려고 합니다.
+        const ele = document.createElement("div");
+        ele.textContent="이 문자는 div에 동적을 추가된 문장임";
+
+        document.body.appendChild(ele);
+        console.log(ele);
+
+        const newImg=document.createElement("img");
+        newImg.src="../images.jpeg";
+        newImg.alt="하트이미지";
+        newImg.width=300;
+
+        document.body.appendChild(newImg);
+
+        const newPara=document.createElement("p")
+        newPara.textContent="이 문단은 스타일이 적용됨";
+        newPara.className="styled-para";
+
+        newPara.style.color='red';
+        newPara.style.fontSize="1.2rem"
+
+        document.body.appendChild(newPara);
+        
+        
+    </script>
+</body>
+</html>

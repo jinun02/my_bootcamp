@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        insertAdjacenText(where, data) : 지정된 요소의 인접한 특정위치에 Text를 삽입하는 메서드
+        where 는 다시 아해와 같은 위치값 속성을 가집니다.
+        beforebegin : 요소 바로 앞
+        afterbegin : 요소 안쪽 시작 부분
+        beforend : 요소 안쪽 끝 부분
+        afterend : 요소 바로 뒤
+    -->
+</head>
+
+<body>
+    <!-- beforebegin 위치 -->
+    <div id="my-div" style="background: yellow;">
+    <!-- afterbegin 위치(안쪽 시작) -->
+        content
+    <!-- beforend 위치(안쪽 끝) -->
+    </div>
+    <!-- afterend 위치(바로 뒤) -->
+    <script>
+        const ele = document.getElementById("my-div");
+
+        ele.insertAdjacentText("beforebegin","beforebegin");
+
+        ele.insertAdjacentText("afterbegin","afterbegin");
+
+        ele.insertAdjacentText("afterend","afterend");
+
+        ele.insertAdjacentText("beforeend","beforeend");
+    </script>
+
+</body>
+
+</html>

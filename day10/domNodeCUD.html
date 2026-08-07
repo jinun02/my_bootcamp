@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        동적으로 DOM의 노드를 자식으로 추가 하거나, 지정한 자식 앞에 삽입하거나,
+        인접한 위치에 텍스트를 삽입하거나, 교체하거나 등의 노드를 제어하는 방법
+        알아보기
+        appendChild() : 특정요소의 자식 요소로 추가하는 메소드
+
+        노드 타입을 가지리 않고 마지막 노드에 추가합니다.
+    -->
+</head>
+
+<body>
+    <div id="my-div" style="border: 1px solid red;margin-bottom: 1em;">
+        컨탠츠 입니다.
+    </div>
+    <button type="button" id="insert-btn">div 자식노드 추가하기</button>
+
+    <script>
+        const btn =document.getElementById('insert-btn');
+
+        btn.addEventListener('click',()=>{
+            const myDiv=document.getElementById('my-div');
+
+            if(myDiv){
+                // const newEle=document.createElement('p');
+                const newText=document.createTextNode("텍스트 노드");
+                // newEle.textContent='hello world';
+
+                myDiv.appendChild(newText);
+            }
+        })
+    </script>
+
+
+
+
+
+
+    <!-- <script>
+        //p요소 노드를 생성해서 ele 변수에 담아보세요
+        // const ele = document.createElement('p');
+        // ele.textContent="하하ㅏ핳";
+        // document.getElementById('my-div').appendChild(ele);
+    </script> -->
+
+</body>
+
+</html>

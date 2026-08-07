@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+    DOM 요소 내부의 컨텐츠의 값을 가져오거나(get) 값을 대입하는(set) 대표적인 속성 3기지를 봅니다.
+    스크립트의 특정 속성은 read only 입니다. 코딩시 명세서 참고하기.
+
+    textConent : 요소의 컨텐츠를 get/set하는 속성
+    innerText : 위와 동일, 단 CSS로 숨겨진 요소의 텍스트는 가져오지못하고 화면에 렌더링된 
+    텍스트만 가져옴, 만약 요소 내에 자손이 있다면 자손 태그는 무시하고 텍스트만 처리함(보안때문에 잘 쓰지 않음)
+    innerHTML : 요소의 내부 텍스트를 포함한 HTML 컨텐츠를 가져오거나 설정.. 
+
+
+    -->
+    <!-- <script>
+        const obj={
+            name:'aa',
+            setName :function(name){
+                if(name.length===0){
+                    return;
+                }
+                this.name=name;
+            },
+            getName:function(){
+                return this.name
+            }
+        }
+    </script> -->
+
+
+
+    <p id="a"><strong>환영합니다</strong></p>
+    <button id="bt">set</button>
+    <div id="ex" style="visibility: hidden;">
+        하하하하
+    </div>
+
+    <script>
+        document.getElementById('bt').addEventListener('click', () => {
+            document.getElementById('a').textContent = '<p>hello</p>';
+        })
+
+        console.log(document.getElementById('ex').textContent);
+    </script>
+
+    <!-- innertext -->
+
+    <script>
+        console.log(document.getElementById('ex').innerText);
+
+    </script>
+</body>
+
+</html>

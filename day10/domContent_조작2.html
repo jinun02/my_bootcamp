@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .hidden-text {
+            display: none;
+        }
+
+        .box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="source-element" class="box">
+        안녕하세요
+        <span class="hidden-text">이 글자는 화면에 가려서 보이지 않음</span>
+        <strong>여기는 강조된 텍스트임</strong>
+    </div>
+
+    <button onclick="comparAttributes()">속성별 데이터 읽어보기</button>
+    <button onclick="modifyContent()">컨텐츠 변경하기</button>
+
+    <div class="box">
+        <h3>결과 출력</h3>
+        <p><strong>1. innerHTML</strong><span id="out-html"></span></p>
+        <p><strong>2. textConent</strong><span id="out-content"></span></p>
+        <p><strong>3. innertext</strong><span id="out-text"></span></p>
+    </div>
+    <script>
+        function comparAttributes(){
+            const source = document.getElementById('source-element');
+
+            document.getElementById('out-html').textContent=source.innerHTML;
+
+            document.getElementById('out-content').textContent=source.textContent;
+
+            document.getElementById('out-text').textContent=source.innerText;
+        }
+
+        function modifyContent(){
+            const source=document.getElementById('source-element');
+
+            // source.innerHTML="<span style='color :red;'> innerHTML로 바꾼내용</span>";
+            // source.textContent="<span style='color :red;'> textContent로 바꾼내용</span>";
+            source.innerText="<span style='color :red;'> innerText로 바꾼내용</span>";
+        }
+    </script>
+
+</body>
+
+</html>

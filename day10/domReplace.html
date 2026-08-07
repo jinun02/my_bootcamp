@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        replaceChild(newChilde, oldChilde) : 특정 부모 노드 내에서 지정한 자식 노드를 새로운 자식 노드로 교체함.
+    -->
+</head>
+
+<body>
+    <div id="parent">
+        <div id="first">First</div>
+        <div id="second">Second</div>
+        <div id="me" style="color: red;">me</div>
+    </div>
+    <hr>
+    <button type="button" id="replace-btn">'me' 요소 교체하기</button>
+
+    <script>
+        const btn=document.getElementById('replace-btn');
+
+        btn.addEventListener('click',()=>{
+            const parent=document.getElementById('patemt');
+            if(parent){
+                // 교체할 새로운 요소 노드할 요소
+                const newChild=document.createElement('p');
+                newChild.textContent='새로운 택스트';
+
+                const oldChild=document.getElementById('me');
+
+                parent.replaceChild(newChild,oldChild);
+            }
+        })
+    </script>
+</body>
+
+</html>

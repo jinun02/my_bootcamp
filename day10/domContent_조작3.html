@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="hidden-element">
+        div 택스트
+        <span style="display: none;">숨겨진 택스트</span>
+        <span style="visibility: hidden;">숨겨진 택스트</span>
+        <span hidden>숨겨진 택스트</span>
+    </div>
+
+    <script>
+        const hiddenElement=document.getElementById("hidden-element");
+        console.log(hiddenElement.innerText);
+
+    </script>
+</body>
+</html>
