@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .container {
+            margin: 50px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 로그인 폼 -->
+        <div id="login-section">
+            <h2>로그인</h2>
+            <input type="text" id="username" placeholder="아이디 입력 (아무거나)">
+            <button onclick="handleLogin()">로그인</button>
+        </div>
+
+        <!-- 로그인 후 화면 -->
+        <div id="dashboard-section" class="hidden">
+            <h2>환영합니다, <span id="user-display"></span>님!</h2>
+            <button onclick="handleLogout()">로그아웃</button>
+        </div>
+    </div>
+
+    <script>
+        function setCookie(name, value, days) {
+            const now = new Date();
+            now.setTime(now.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + now.toUTCString();
+            // 쿠키던지기
+            document.cookie = `${name}=${encodeURIComponent(value)};${expires};path/`;
+        }
+
+        function getCookie(name) {
+            const cookieName = name + '=';
+            // 쿠키를 전송할떄 Encoding 해서 보낼겁니다.
+            // 따라서 가져온 쿠키도 Decoding해서 찾아내야합니다.
+            const decodedCoKkie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCoKkie.split(";");
+
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i].trim();
+
+                if (cookie.indexOf(cookieName) === 0) {
+                    // 찾는 쿠키의 키가 존재한다면
+                    return cookie.substring(cookieName.length, cookie.length);
+                } else {
+                    console.log('해당쿠키 있음')
+                }
+            }
+            return '';
+        }
+
+
+        function handleLogin() {
+            const userNameInput = document.getElementById('username').value;
+
+            if (userNameInput.trim() === "") {
+                alert('아이디 입력해');
+                return;
+            }
+
+            // 쿠키지정하는 함수 호출하기.. 유효기간은 1일로 설정하기
+            setCookie('username', userNameInput, 1);
+            // 로그인 여부 상태 함수 호출하기
+            checkLoginStatus();
+        }
+
+
+
+
+        function checkLoginStatus() {
+            const loginSection = document.getElementById('login-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            const userDisplay = document.getElementById('user-display');
+
+            //username 에 해당하는 쿠키정보를 얻어냅니다.
+            const savedUser = getCookie('username');
+            // console.log(savedUser);
+            if(savedUser){
+                loginSection.classList.add('hidden');
+                dashboardSection.classList.remove('hidden');
+                userDisplay.innerText=savedUser;
+            }else{
+                loginSection.classList.remove('hidden');
+                dashboardSection.classList.add('hidden');
+                document.getElementById('username'.value='');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
