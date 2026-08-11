@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>골목 맛집 수첩</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root{
+    --paper: #efe6d3;
+    --paper-dark: #e6dac0;
+    --ink: #2c2620;
+    --ink-soft: #5a5147;
+    --seal: #ab3a2c;
+    --seal-dark: #8c2e22;
+    --moss: #5c6b47;
+    --amber: #c98a35;
+    --denim: #3f5568;
+    --card: #f7f1e3;
+    --radius: 3px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Gowun Batang', serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 34px, rgba(44,38,32,0.045) 35px),
+      radial-gradient(ellipse at 20% -10%, rgba(255,255,255,0.5), transparent 40%),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  /* 스프링 노트 상단 */
+  .spiral{
+    height:22px;
+    display:flex;
+    justify-content:center;
+    gap:26px;
+    padding-top:10px;
+    background:var(--paper-dark);
+    border-bottom:1px solid rgba(44,38,32,0.15);
+  }
+  .spiral span{
+    width:12px; height:12px;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #fff9, transparent 40%), #cbbf9e;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.35);
+  }
+
+  header.top{
+    max-width:1080px;
+    margin:0 auto;
+    padding:34px 24px 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .brand{
+    font-family:'Song Myung', serif;
+    font-size:1.7rem;
+    letter-spacing:1px;
+  }
+  .brand small{
+    display:block;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    letter-spacing:2px;
+    margin-top:4px;
+  }
+  .saved-note{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.85rem;
+    background:var(--card);
+    border:1px solid rgba(44,38,32,0.2);
+    padding:8px 14px;
+    border-radius:var(--radius);
+    box-shadow:1px 2px 0 rgba(44,38,32,0.12);
+    transform:rotate(-1deg);
+  }
+  .saved-note b{color:var(--seal);}
+
+  /* HERO */
+  .hero{
+    max-width:1080px;
+    margin:14px auto 0;
+    padding:26px 24px 30px;
+    position:relative;
+  }
+  .date-stamp{
+    position:absolute;
+    top:6px;
+    right:24px;
+    width:96px; height:96px;
+    border-radius:50%;
+    border:3px solid var(--seal);
+    color:var(--seal);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.62rem;
+    line-height:1.3;
+    transform:rotate(9deg);
+    opacity:0.9;
+    filter:url(#stampTexture);
+    text-align:center;
+  }
+  .date-stamp b{font-size:0.95rem; font-family:'Song Myung', serif;}
+  .hero h1{
+    font-family:'Song Myung', serif;
+    font-size:clamp(2rem, 5vw, 3.1rem);
+    line-height:1.28;
+    max-width:640px;
+  }
+  .hero p.sub{
+    margin-top:12px;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    max-width:520px;
+  }
+
+  .controls{
+    display:flex;
+    gap:14px;
+    margin-top:26px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .search-box{
+    flex:1;
+    min-width:220px;
+    background:var(--card);
+    border:1px solid rgba(44,38,32,0.25);
+    border-radius:var(--radius);
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:2px 3px 0 rgba(44,38,32,0.1);
+  }
+  .search-box::before{content:"✎"; color:var(--seal); font-size:1rem;}
+  .search-box input{
+    border:none; outline:none; background:transparent;
+    font-family:'Gowun Batang', serif;
+    font-size:0.98rem;
+    width:100%;
+    color:var(--ink);
+  }
+  .view-toggle{
+    display:flex;
+    border:1px solid rgba(44,38,32,0.3);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .view-toggle button{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.85rem;
+    padding:11px 18px;
+    background:var(--card);
+    border:none;
+    cursor:pointer;
+    color:var(--ink-soft);
+    transition:background .2s, color .2s;
+  }
+  .view-toggle button.active{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .add-btn{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.85rem;
+    padding:11px 18px;
+    background:var(--seal);
+    color:var(--card);
+    border:1px solid var(--seal-dark);
+    border-radius:var(--radius);
+    cursor:pointer;
+    box-shadow:2px 3px 0 rgba(44,38,32,0.15);
+    transition:transform .12s ease;
+  }
+  .add-btn:hover{ transform:translateY(-1px); }
+  .add-btn:active{ transform:translateY(0); }
+
+  /* 맛집 추가 모달 */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(44,38,32,0.45);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:50;
+  }
+  .modal-box{
+    background:var(--card);
+    border-radius:var(--radius);
+    border:1px solid rgba(44,38,32,0.2);
+    max-width:440px;
+    width:100%;
+    max-height:90vh;
+    overflow-y:auto;
+    padding:26px 26px 22px;
+    position:relative;
+    box-shadow:4px 8px 0 rgba(44,38,32,0.2);
+  }
+  .modal-title{
+    font-family:'Song Myung', serif;
+    font-size:1.35rem;
+    margin-bottom:18px;
+  }
+  .modal-close{
+    position:absolute;
+    top:14px; right:16px;
+    background:none;
+    border:none;
+    font-size:1.3rem;
+    cursor:pointer;
+    color:var(--ink-soft);
+    line-height:1;
+  }
+  #addForm label{
+    display:block;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  #addForm input, #addForm select{
+    display:block;
+    width:100%;
+    margin-top:6px;
+    padding:9px 11px;
+    border:1px solid rgba(44,38,32,0.3);
+    border-radius:var(--radius);
+    background:var(--paper);
+    font-family:'Gowun Batang', serif;
+    font-size:0.95rem;
+    color:var(--ink);
+  }
+  .field-hint{
+    display:block;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+    opacity:0.75;
+    margin-top:4px;
+  }
+  .modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:8px;
+  }
+  .modal-actions button{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.85rem;
+    padding:10px 18px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    border:1px solid rgba(44,38,32,0.3);
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .modal-actions .submit-btn{
+    background:var(--seal);
+    color:var(--card);
+    border-color:var(--seal-dark);
+  }
+  .delete-link{
+    margin-top:10px;
+    background:none;
+    border:none;
+    padding:0;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+    text-decoration:underline;
+    cursor:pointer;
+    opacity:0.75;
+  }
+  .delete-link:hover{ color:var(--seal); opacity:1; }
+  .user-added-tag{
+    position:absolute;
+    top:10px; left:10px;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.62rem;
+    background:rgba(63,85,104,0.85);
+    color:var(--card);
+    padding:2px 7px;
+    border-radius:20px;
+    z-index:2;
+  }
+
+  /* 탭 (와시테이프) */
+  .tabs{
+    max-width:1080px;
+    margin:22px auto 0;
+    padding:0 24px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .tab{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.86rem;
+    padding:9px 16px;
+    background: linear-gradient(180deg, transparent 60%, rgba(171,58,44,0.0) 60%);
+    border:none;
+    cursor:pointer;
+    color:var(--ink-soft);
+    position:relative;
+    opacity:0.85;
+  }
+  .tab::after{
+    content:"";
+    position:absolute;
+    left:8%; right:8%; bottom:2px;
+    height:7px;
+    background:transparent;
+    border-radius:2px;
+    transition:background .2s;
+  }
+  .tab.active{
+    color:var(--ink);
+    opacity:1;
+    font-weight:700;
+  }
+  .tab.active::after{
+    background:rgba(201,138,53,0.55);
+    height:9px;
+  }
+
+  .sort-row{
+    max-width:1080px;
+    margin:16px auto 0;
+    padding:0 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+  .sort-row select{
+    font-family:'Nanum Gothic Coding', monospace;
+    background:var(--card);
+    border:1px solid rgba(44,38,32,0.25);
+    border-radius:var(--radius);
+    padding:6px 10px;
+    color:var(--ink);
+  }
+
+  /* 목록 그리드 */
+  #listView{
+    max-width:1080px;
+    margin:16px auto 0;
+    padding:10px 24px 0;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
+    gap:22px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid rgba(44,38,32,0.15);
+    border-radius:var(--radius);
+    padding:0;
+    position:relative;
+    box-shadow:2px 4px 0 rgba(44,38,32,0.10);
+    transition:transform .18s ease, box-shadow .18s ease;
+    overflow:hidden;
+  }
+  .card:hover{
+    transform:translateY(-4px) rotate(-0.4deg);
+    box-shadow:4px 8px 4px rgba(44,38,32,0.15);
+  }
+  .tape{
+    position:absolute;
+    top:-8px; left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    width:70px; height:22px;
+    background:rgba(201,138,53,0.35);
+    border:1px solid rgba(201,138,53,0.5);
+    z-index:3;
+  }
+  .swatch{
+    height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:3.4rem;
+    position:relative;
+    border-bottom:1px dashed rgba(44,38,32,0.25);
+  }
+  .badge{
+    position:absolute;
+    top:10px; right:10px;
+    width:56px; height:56px;
+    border-radius:50%;
+    border:2.5px solid var(--seal);
+    color:var(--seal);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-weight:700;
+    font-size:0.68rem;
+    transform:rotate(-14deg);
+    filter:url(#stampTexture);
+    background:rgba(247,241,227,0.4);
+    line-height:1.15;
+    z-index:2;
+  }
+  .heart-btn{
+    position:absolute;
+    bottom:10px; right:10px;
+    width:32px; height:32px;
+    border-radius:50%;
+    border:1px solid rgba(44,38,32,0.25);
+    background:rgba(247,241,227,0.85);
+    cursor:pointer;
+    font-size:0.95rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink-soft);
+    z-index:2;
+  }
+  .heart-btn.saved{
+    color:var(--seal);
+    border-color:var(--seal);
+    animation:splash .35s ease;
+  }
+  @keyframes splash{
+    0%{transform:scale(1);}
+    45%{transform:scale(1.35);}
+    100%{transform:scale(1);}
+  }
+  .card-body{padding:14px 16px 16px;}
+  .card-body .cat{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.7rem;
+    letter-spacing:1px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .card-body h3{
+    font-family:'Song Myung', serif;
+    font-size:1.25rem;
+    margin:4px 0 6px;
+  }
+  .card-body .area{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .stars{color:var(--amber); font-size:0.85rem; letter-spacing:1px;}
+  .stars b{color:var(--ink); font-family:'Nanum Gothic Coding', monospace; margin-left:4px; font-size:0.78rem;}
+  .tags{
+    margin-top:10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .tags span{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.68rem;
+    background:rgba(92,107,71,0.12);
+    color:var(--moss);
+    padding:3px 8px;
+    border-radius:20px;
+    border:1px solid rgba(92,107,71,0.25);
+  }
+  .empty-msg{
+    grid-column:1/-1;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.9rem;
+  }
+
+  /* 지도 뷰 */
+  #mapView{
+    max-width:1080px;
+    margin:16px auto 0;
+    padding:10px 24px 0;
+    display:none;
+  }
+  .map-wrap{
+    background:var(--card);
+    border:1px solid rgba(44,38,32,0.2);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:2px 4px 0 rgba(44,38,32,0.1);
+  }
+  .map-wrap p{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .pin{
+    cursor:pointer;
+  }
+  .pin circle{
+    fill:var(--seal);
+    stroke:var(--card);
+    stroke-width:2;
+    transition:r .15s ease;
+  }
+  .pin:hover circle{ r:9; }
+  .pin text{
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:11px;
+    fill:var(--ink);
+  }
+  #mapContainer .leaflet-popup-content{
+    font-family:'Gowun Batang', serif;
+    font-size:0.85rem;
+  }
+
+  footer{
+    max-width:1080px;
+    margin:50px auto 0;
+    padding:20px 24px;
+    text-align:center;
+    font-family:'Nanum Gothic Coding', monospace;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+    border-top:1px dashed rgba(44,38,32,0.25);
+  }
+
+  @media (max-width:600px){
+    .date-stamp{ position:static; margin-bottom:16px; transform:rotate(-4deg); }
+    header.top{flex-direction:column;}
+  }
+
+  :focus-visible{
+    outline:2px solid var(--seal);
+    outline-offset:2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="stampTexture">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
+  </filter>
+</svg>
+
+<div class="spiral">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<header class="top">
+  <div class="brand">한림대 골목 맛집 수첩
+    <small>HALLYM UNIV. MATJIP DIARY · 정문에서 걸어가는 진짜 맛집</small>
+  </div>
+  <div class="saved-note">담아둔 곳 <b id="savedCount">0</b>곳</div>
+</header>
+
+<section class="hero">
+  <div class="date-stamp">
+    <span>2026.08.11</span>
+    <b>오늘의 기록</b>
+  </div>
+  <h1>오늘은 어느<br>골목으로 갈까?</h1>
+  <p class="sub">한림대학교 정문에서부터 걸어갈 수 있는 곳들만 골라 적어둔 수첩이에요. 태그를 찍어 검색하거나, 지도에서 동네를 골라보세요.</p>
+
+  <div class="controls">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="식당명, 동네, 태그로 찾기">
+    </div>
+    <div class="view-toggle">
+      <button id="btnList" class="active">목록</button>
+      <button id="btnMap">지도</button>
+    </div>
+    <button id="btnAdd" class="add-btn">✎ 맛집 추가</button>
+  </div>
+</section>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-cat="전체">전체</button>
+  <button class="tab" data-cat="한식">한식</button>
+  <button class="tab" data-cat="분식">분식</button>
+  <button class="tab" data-cat="고기">고기</button>
+  <button class="tab" data-cat="일식">일식</button>
+  <button class="tab" data-cat="카페">카페</button>
+</nav>
+
+<div class="sort-row">
+  <span id="resultCount">9곳의 기록</span>
+  <label>정렬
+    <select id="sortSelect">
+      <option value="rating">평점순</option>
+      <option value="name">이름순</option>
+    </select>
+  </label>
+</div>
+
+<section id="listView"></section>
+
+<section id="mapView">
+  <div class="map-wrap">
+    <p>핀을 클릭하면 해당 맛집만 골라 보여드려요. (OpenStreetMap 기반, 무료 · 키 불필요)</p>
+    <div id="mapContainer" style="width:100%; height:420px; border-radius:var(--radius); border:1px solid rgba(44,38,32,0.2);"></div>
+  </div>
+</section>
+
+<footer>한림대학교 앞, 손으로 눌러 담은 우리 동네 기록 · 골목 맛집 수첩</footer>
+
+<div id="addModal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <button id="modalClose" class="modal-close" aria-label="닫기">×</button>
+    <h2 class="modal-title">새 맛집 적어두기</h2>
+    <form id="addForm">
+      <label>식당 이름
+        <input type="text" id="fName" required placeholder="예: 우리동네 김밥집">
+      </label>
+      <label>카테고리
+        <select id="fCat">
+          <option value="한식">한식</option>
+          <option value="분식">분식</option>
+          <option value="고기">고기</option>
+          <option value="일식">일식</option>
+          <option value="카페">카페</option>
+        </select>
+      </label>
+      <label>동네
+        <input type="text" id="fArea" required placeholder="예: 옥천동">
+      </label>
+      <label>평점 (0~5)
+        <input type="number" id="fRating" min="0" max="5" step="0.1" value="4.5">
+      </label>
+      <label>태그 (쉼표로 구분)
+        <input type="text" id="fTags" placeholder="예: 혼밥, 야식, 가성비">
+      </label>
+      <label>이모지
+        <input type="text" id="fEmoji" maxlength="2" placeholder="🍴">
+        <span class="field-hint">비워두면 카테고리에 맞는 이모지가 자동으로 들어가요.</span>
+      </label>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel">취소</button>
+        <button type="submit" class="submit-btn">수첩에 적기</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  const restaurants = [
+    { id:1, name:'강릉집', cat:'한식', area:'옥천동', rating:4.2, badge:null, emoji:'🍚', tags:['백반','가정식','든든한한끼'], lat:37.8830512, lng:127.7281361 },
+    { id:2, name:'호손만두', cat:'분식', area:'옥천동', rating:4.0, badge:null, emoji:'🥟', tags:['만두','분식','포장가능'], lat:37.8809226, lng:127.7457770 },
+    { id:3, name:'오이트 에스프레소바', cat:'카페', area:'옥천동', rating:4.6, badge:null, emoji:'☕', tags:['에스프레소','카공','감성'], lat:37.8825549, lng:127.7307591 },
+    { id:4, name:'부안막국수', cat:'한식', area:'후평동', rating:3.7, badge:null, emoji:'🍜', tags:['막국수','메밀','여름별미'], lat:37.8816349, lng:127.7496658 },
+    { id:5, name:'감미옥', cat:'한식', area:'후평동', rating:3.6, badge:null, emoji:'🍲', tags:['설렁탕','해장','든든'], lat:37.8779550, lng:127.7378832 },
+    { id:6, name:'큰집한우', cat:'고기', area:'운교동', rating:4.7, badge:'최고의', emoji:'🥩', tags:['한우','회식','불고기정식'], lat:37.8778137, lng:127.7348444 },
+    { id:7, name:'교동부대찌개', cat:'한식', area:'교동(정문 지하)', rating:4.5, badge:'베스트', emoji:'🥘', tags:['부대찌개','무한리필','정문앞'], lat:37.8797550, lng:127.7288465 },
+    { id:8, name:'미성카츠', cat:'일식', area:'옥천동', rating:4.4, badge:'새로운', emoji:'🍱', tags:['돈카츠','점심','바삭'], lat:37.8829220, lng:127.7361545 },
+    { id:9, name:'송가네 냉면 주는 알밥집', cat:'한식', area:'옥천동', rating:4.3, badge:null, emoji:'🍙', tags:['알밥','냉면','세트메뉴'], lat:37.8833733, lng:127.7395422 }
+  ];
+  let nextId = restaurants.length + 1;
+
+  const defaultEmojiByCat = {
+    '한식': '🍚', '분식': '🍢', '고기': '🥩', '일식': '🍱', '카페': '☕'
+  };
+
+  const state = {
+    cat: '전체',
+    search: '',
+    sort: 'rating',
+    saved: new Set(),
+    view: 'list'
+  };
+
+  const listView = document.getElementById('listView');
+  const resultCount = document.getElementById('resultCount');
+  const savedCountEl = document.getElementById('savedCount');
+  const tabs = document.querySelectorAll('.tab');
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+  const btnList = document.getElementById('btnList');
+  const btnMap = document.getElementById('btnMap');
+  const mapView = document.getElementById('mapView');
+  const btnAdd = document.getElementById('btnAdd');
+  const addModal = document.getElementById('addModal');
+  const addForm = document.getElementById('addForm');
+  const modalClose = document.getElementById('modalClose');
+  const modalCancel = document.getElementById('modalCancel');
+
+  function starString(rating){
+    const full = Math.round(rating);
+    let s = '';
+    for(let i=0;i<5;i++){ s += i < full ? '★' : '☆'; }
+    return s;
+  }
+
+  function getFiltered(){
+    let result = restaurants.filter(r => {
+      const matchesCat = state.cat === '전체' || r.cat === state.cat;
+      const term = state.search.trim().toLowerCase();
+      const matchesSearch = !term ||
+        r.name.toLowerCase().includes(term) ||
+        r.area.toLowerCase().includes(term) ||
+        r.tags.some(t => t.toLowerCase().includes(term));
+      return matchesCat && matchesSearch;
+    });
+
+    if(state.sort === 'rating'){
+      result.sort((a,b) => b.rating - a.rating);
+    } else {
+      result.sort((a,b) => a.name.localeCompare(b.name, 'ko'));
+    }
+    return result;
+  }
+
+  function render(){
+    const filtered = getFiltered();
+    resultCount.textContent = filtered.length + '곳의 기록';
+    listView.innerHTML = '';
+
+    if(filtered.length === 0){
+      const msg = document.createElement('div');
+      msg.className = 'empty-msg';
+      msg.textContent = '수첩에 아직 이런 곳은 없어요. 다른 태그로 찾아보세요.';
+      listView.appendChild(msg);
+      return;
+    }
+
+    filtered.forEach(r => {
+      const card = document.createElement('article');
+      card.className = 'card';
+
+      const tape = document.createElement('div');
+      tape.className = 'tape';
+      card.appendChild(tape);
+
+      if(r.userAdded){
+        const userTag = document.createElement('div');
+        userTag.className = 'user-added-tag';
+        userTag.textContent = '내가 추가';
+        card.appendChild(userTag);
+      }
+
+      const swatch = document.createElement('div');
+      swatch.className = 'swatch';
+      swatch.textContent = r.emoji;
+      if(r.badge){
+        const badge = document.createElement('div');
+        badge.className = 'badge';
+        badge.textContent = r.badge;
+        swatch.appendChild(badge);
+      }
+      const heartBtn = document.createElement('button');
+      heartBtn.className = 'heart-btn';
+      heartBtn.setAttribute('aria-label', '담아두기');
+      heartBtn.textContent = state.saved.has(r.id) ? '♥' : '♡';
+      if(state.saved.has(r.id)) heartBtn.classList.add('saved');
+      heartBtn.addEventListener('click', () => toggleSave(r.id, heartBtn));
+      swatch.appendChild(heartBtn);
+      card.appendChild(swatch);
+
+      const body = document.createElement('div');
+      body.className = 'card-body';
+
+      const cat = document.createElement('div');
+      cat.className = 'cat';
+      cat.textContent = r.cat;
+      body.appendChild(cat);
+
+      const h3 = document.createElement('h3');
+      h3.textContent = r.name;
+      body.appendChild(h3);
+
+      const area = document.createElement('div');
+      area.className = 'area';
+      area.textContent = '📍 ' + r.area;
+      body.appendChild(area);
+
+      const stars = document.createElement('div');
+      stars.className = 'stars';
+      stars.innerHTML = starString(r.rating) + ' <b>' + r.rating.toFixed(1) + '</b>';
+      body.appendChild(stars);
+
+      const tags = document.createElement('div');
+      tags.className = 'tags';
+      r.tags.forEach(t => {
+        const tag = document.createElement('span');
+        tag.textContent = '#' + t;
+        tags.appendChild(tag);
+      });
+      body.appendChild(tags);
+
+      if(r.userAdded){
+        const delBtn = document.createElement('button');
+        delBtn.className = 'delete-link';
+        delBtn.type = 'button';
+        delBtn.textContent = '이 기록 지우기';
+        delBtn.addEventListener('click', () => removeRestaurant(r.id));
+        body.appendChild(delBtn);
+      }
+
+      card.appendChild(body);
+      listView.appendChild(card);
+    });
+  }
+
+  function toggleSave(id, btn){
+    if(state.saved.has(id)){
+      state.saved.delete(id);
+      btn.textContent = '♡';
+      btn.classList.remove('saved');
+    } else {
+      state.saved.add(id);
+      btn.textContent = '♥';
+      btn.classList.add('saved');
+    }
+    savedCountEl.textContent = state.saved.size;
+  }
+
+  function removeRestaurant(id){
+    const idx = restaurants.findIndex(r => r.id === id);
+    if(idx === -1) return;
+    restaurants.splice(idx, 1);
+    state.saved.delete(id);
+    savedCountEl.textContent = state.saved.size;
+    removeMarker(id);
+    render();
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      state.cat = tab.dataset.cat;
+      render();
+    });
+  });
+
+  searchInput.addEventListener('input', (e) => {
+    state.search = e.target.value;
+    render();
+  });
+
+  sortSelect.addEventListener('change', (e) => {
+    state.sort = e.target.value;
+    render();
+  });
+
+  function setView(view){
+    state.view = view;
+    if(view === 'list'){
+      listView.style.display = 'grid';
+      mapView.style.display = 'none';
+      btnList.classList.add('active');
+      btnMap.classList.remove('active');
+    } else {
+      listView.style.display = 'none';
+      mapView.style.display = 'block';
+      btnMap.classList.add('active');
+      btnList.classList.remove('active');
+      initLeafletMap();
+    }
+  }
+  btnList.addEventListener('click', () => setView('list'));
+  btnMap.addEventListener('click', () => setView('map'));
+
+  // 지도 초기화 (Leaflet + OpenStreetMap — 무료, 키 발급 불필요)
+  let leafletMap = null;
+  const markersById = {};
+  const mapContainerEl = document.getElementById('mapContainer');
+
+  function addMarker(r){
+    if(!leafletMap) return;
+    const marker = L.marker([r.lat, r.lng]).addTo(leafletMap);
+    marker.bindPopup(
+      '<b>' + r.emoji + ' ' + r.name + '</b><br>' +
+      r.area + ' · ★' + r.rating.toFixed(1)
+    );
+    marker.on('click', function(){
+      state.search = r.name;
+      searchInput.value = r.name;
+      setView('list');
+      render();
+      listView.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+    markersById[r.id] = marker;
+  }
+
+  function removeMarker(id){
+    if(leafletMap && markersById[id]){
+      leafletMap.removeLayer(markersById[id]);
+      delete markersById[id];
+    }
+  }
+
+  function initLeafletMap(retryCount){
+    retryCount = retryCount || 0;
+
+    if(leafletMap){
+      // 이미 만들어진 지도라면 크기만 다시 계산 (숨겨져 있다가 보일 때 타일이 깨지는 것 방지)
+      setTimeout(() => leafletMap.invalidateSize(), 0);
+      return;
+    }
+
+    // Leaflet 라이브러리(L)가 아직 로드 중일 수 있으니 잠깐 재시도해본다.
+    if(typeof L === 'undefined'){
+      if(retryCount < 10){
+        setTimeout(() => initLeafletMap(retryCount + 1), 300);
+        return;
+      }
+      // 그래도 안 되면 CDN이 막혀있는 것으로 보고 안내 문구를 보여준다.
+      mapContainerEl.innerHTML =
+        '<div style="height:100%; display:flex; align-items:center; justify-content:center; text-align:center; padding:30px; font-family:\'Nanum Gothic Coding\', monospace; font-size:0.82rem; color:var(--ink-soft); line-height:1.7;">' +
+        '지도를 불러오지 못했어요.<br>이 미리보기 화면이 외부 지도 라이브러리(CDN) 불러오기를 막고 있을 수 있어요.<br>파일을 실제 브라우저(Chrome, Safari 등)에서 열어보세요.' +
+        '</div>';
+      return;
+    }
+
+    leafletMap = L.map('mapContainer').setView([37.8815, 127.7355], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+    }).addTo(leafletMap);
+
+    restaurants.forEach(addMarker);
+
+    setTimeout(() => leafletMap.invalidateSize(), 0);
+  }
+
+  // 맛집 추가 모달
+  function openModal(){
+    addModal.style.display = 'flex';
+    document.getElementById('fName').focus();
+  }
+  function closeModal(){
+    addModal.style.display = 'none';
+    addForm.reset();
+  }
+  btnAdd.addEventListener('click', openModal);
+  modalClose.addEventListener('click', closeModal);
+  modalCancel.addEventListener('click', closeModal);
+  addModal.addEventListener('click', (e) => {
+    if(e.target === addModal) closeModal();
+  });
+
+  addForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('fName').value.trim();
+    const area = document.getElementById('fArea').value.trim();
+    if(!name || !area){
+      return; // required 속성이 이미 막아주지만, 방어적으로 한 번 더 확인
+    }
+
+    const cat = document.getElementById('fCat').value;
+    let rating = parseFloat(document.getElementById('fRating').value);
+    if(isNaN(rating)) rating = 4.5;
+    rating = Math.min(5, Math.max(0, rating));
+
+    const tagsRaw = document.getElementById('fTags').value.trim();
+    const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
+
+    const emojiInput = document.getElementById('fEmoji').value.trim();
+    const emoji = emojiInput || defaultEmojiByCat[cat] || '🍴';
+
+    // 위치를 따로 입력받지 않으니, 한림대 근처에 살짝 흩뿌려서 지도에 표시한다.
+    const jitter = () => (Math.random() - 0.5) * 0.01;
+    const newRestaurant = {
+      id: nextId++,
+      name: name,
+      cat: cat,
+      area: area,
+      rating: rating,
+      badge: null,
+      emoji: emoji,
+      tags: tags,
+      lat: 37.8815 + jitter(),
+      lng: 127.7355 + jitter(),
+      userAdded: true
+    };
+
+    restaurants.push(newRestaurant);
+    addMarker(newRestaurant);
+    closeModal();
+
+    // 방금 추가한 항목이 바로 보이도록 전체 탭 + 검색 초기화
+    tabs.forEach(t => t.classList.remove('active'));
+    document.querySelector('.tab[data-cat="전체"]').classList.add('active');
+    state.cat = '전체';
+    state.search = '';
+    searchInput.value = '';
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery 를 이용한 아코디언 메뉴</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .accordion-container {
+            width: 100%;
+            max-width: 600px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .accordion-title {
+            padding: 20px;
+            background: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+            color: #2c3e50;
+        }
+        .accordion-item {
+            border-bottom: 1px solid #eaeaea;
+        }
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        .accordion-header {
+            width: 100%;
+            padding: 18px 20px;
+            background: #ffffff;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a5568;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .accordion-header:hover {
+            background-color: #f7fafc;
+            color: #3182ce;
+        }
+        /* 활성화된 헤더 스타일 */
+        .accordion-item.active .accordion-header {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+        }
+        /* 화살표 아이콘 */
+        .icon {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #a0aec0;
+            border-bottom: 2px solid #a0aec0;
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+        .accordion-item.active .icon {
+            transform: rotate(-135deg);
+            border-color: #2b6cb0;
+        }
+        /* 본문 내용 영역 */
+        .accordion-content {
+            background-color: #fafafa;
+            display: none; /* 기본적으로 숨김 */
+            overflow: hidden;
+        }
+        .accordion-body {
+            padding: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <div class="accordion-container">
+        <div class="accordion-title">자주 묻는 질문 (FAQ)</div>
+
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>Q1. jQuery 아코디언 메뉴는 어떻게 작동하나요?</span>
+                <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="accordion-body">
+                    질문(Header)을 클릭하면 jQuery의 <code>slideToggle()</code> 메서드가 실행되어 본문(Content)을 부드럽게 펼치거나 접습니다. 동시에 기존에 열려있던 다른 항목들은 <code>slideUp()</code>을 통해 자동으로 닫히도록 구성되어 있습니다.
+                </div>
+            </div>
+        </div>
+
+         <!-- 항목 2 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>Q2. 여러 개의 메뉴를 동시에 열어둘 수도 있나요?</span>
+                <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="accordion-body">
+                    네, 가능합니다! 현재 코드에 작성된 <code>.slideUp()</code>과 <code>.removeClass('active')</code> 처리 부분을 제외하면, 다른 항목에 영향을 주지 않고 클릭한 항목만 개별적으로 켜고 닫히는 멀티 오픈 방식으로 쉽게 변경할 수 있습니다.
+                </div>
+            </div>
+        </div>
+
+        <!-- 항목 3 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>Q3. 애니메이션 속도를 변경하고 싶다면 어떻게 하나요?</span>
+                <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <div class="accordion-body">
+                    <code>slideToggle(300)</code>과 같이 메서드 내부의 숫자를 수정하시면 됩니다. 밀리초(ms) 단위 기준이므로 300은 0.3초를 의미합니다. 'slow' 또는 'fast' 같은 문자열 키워드를 전달할 수도 있습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.accordion-header').click(function(){
+                let item = $(this).parent('.accordion-item');
+                let content = $(this).next('.accordion-content');
+
+
+                // 열려있는 항목 인자를 판별해보자
+                console.log(item.hasClass('active'));
+                if(item.hasClass('active')){
+                    content.slideUp(300);
+                    item.removeClass('active');
+                }else{
+                    // 다른 열린 항목들을 닫도록 설정
+                    $('accordion-content').slideUp(300);
+                    $('accordion-item').removeClass('active');
+
+                    content.slideDown(300);
+                    item.addClass('active');
+                }
+                
+
+            })
+        });
+    </script>
+    
+</body>
+</html>

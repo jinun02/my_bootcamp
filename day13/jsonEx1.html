@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+    JSON 객체 ; Java Script Object Notation 의 약자로 , 데이터를 주고 받기위한 경량의 텍스트
+    기반 포맷을 통칭합니다.
+
+    자바스크립트의 객체와는 틀리니 잘 구분하세요.
+
+    스크립트 일반 객체와 JSON의 문법차이..
+    밍반 객체는 말그대로 객체이고, 형태는 메모리상의 데이터 구조를 뜻함..
+    key 표기는 따옴표 생략가능하고, ex> name='json' 여기서 name key는 따옴표 생략 가능함.
+    value 표기는 따옴표 또는 큰 따옴표 모두 사용가능함.
+    허용 데이터는 함수, undefined 등이 사용 가능하며, 후행 컴마 사용도 가능함.
+    ex> (a:1,b:2);
+
+    JSON은 단순 텍스트 문자열임, 모든 키는 반드시 큰 따옴표로 묶어야함.(ex> "name":"kim")
+    value 또한 반드시 "" 로 묶어서 처리 해야함.
+    허용 데이터는 숫자, 문자열,boolean,null,객체, 배열만 허용함
+    후행 컴마 사용 절대 불가능함.(ex> "a":"hello")옆에 컴마는 존재하면 안됨
+
+
+    -->
+</head>
+<body>
+    <script>
+        const jsonString='{"name":"홍길동", "age":20, "skills":["js","PYTHON"]}';
+        const userObj=JSON.parse(jsonString);
+        // 홍길동이 가진 두번쨰 기술을 출력하가
+        // userObj.skills[1];
+
+        // Json 객체로 나를 표현합니다.
+        // 속성은 id=value, role=developer, isActive=true
+        // me 라는 JSON 객체를 생성합니다
+        const me='{"id":"Jason","role":"developer","isActive":true}'
+        const objme={
+            id:'jason',
+            role:'dev',
+            isActive:true
+        };
+        // 일반 객체를 JSON의 문자열로 직렬화 합니다.
+        const jsonText=JSON.stringify(objme);
+        
+    </script>
+</body>
+</html>
